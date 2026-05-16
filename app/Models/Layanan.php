@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Layanan extends Model
 {
@@ -37,10 +38,9 @@ class Layanan extends Model
 
     /**
      * Relationship: Layanan hasMany DetailTransaksi.
-     * Will be used in Sprint 2 when detail_transaksis table is created.
      */
-    // public function detailTransaksi()
-    // {
-    //     return $this->hasMany(\App\Models\DetailTransaksi::class);
-    // }
+    public function detailTransaksi(): HasMany
+    {
+        return $this->hasMany(DetailTransaksi::class);
+    }
 }

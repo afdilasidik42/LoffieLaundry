@@ -4,8 +4,11 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BahanController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\MesinController;
 use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +53,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Master Data — Kelola Bahan
     Route::resource('bahan', BahanController::class)->except(['show']);
+
+    // Master Data — Kelola Mesin
+    Route::resource('mesin', MesinController::class)->except(['show']);
+
+    // Operasional — Kelola Pesanan
+    Route::resource('pesanan', PesananController::class);
+
+    // Operasional — Kelola Status (Kanban Board)
+    Route::get('/status', [StatusController::class, 'index'])->name('status.index');
+    Route::put('/status/{id}/update', [StatusController::class, 'update'])->name('status.update');
 });
 
 /*

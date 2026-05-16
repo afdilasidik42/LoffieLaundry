@@ -4,24 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Bahan extends Model
+class Mesin extends Model
 {
     use HasFactory;
 
     /**
      * The table associated with the model.
      */
-    protected $table = 'bahans';
+    protected $table = 'mesins';
 
     /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'kode_bahan',
-        'nama_bahan',
-        'biaya_per_kg',
+        'nama_mesin',
+        'kapasitas_max',
+        'is_active',
     ];
 
     /**
@@ -30,15 +29,8 @@ class Bahan extends Model
     protected function casts(): array
     {
         return [
-            'biaya_per_kg' => 'decimal:2',
+            'kapasitas_max' => 'integer',
+            'is_active'     => 'boolean',
         ];
-    }
-
-    /**
-     * Relationship: Bahan hasMany DetailTransaksi.
-     */
-    public function detailTransaksi(): HasMany
-    {
-        return $this->hasMany(DetailTransaksi::class);
     }
 }
