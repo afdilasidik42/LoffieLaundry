@@ -5,11 +5,17 @@
 @section('page-description', 'Rincian nota transaksi ' . $pesanan->kode_pesanan)
 
 @section('content')
-<div class="max-w-4xl space-y-6">
-    <a href="{{ route('admin.pesanan.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-sky-600 transition-colors">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Kembali ke Daftar Pesanan
-    </a>
+<div class="max-w-4xl space-y-6 print:w-full print:max-w-none print:space-y-4">
+    <div class="flex items-center justify-between print:hidden">
+        <a href="{{ route('admin.pesanan.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-sky-600 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Kembali ke Daftar Pesanan
+        </a>
+        <button type="button" onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white text-sm font-semibold rounded-lg hover:bg-sky-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Cetak Nota
+        </button>
+    </div>
 
     {{-- Order Header --}}
     <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
@@ -120,7 +126,7 @@
     </div>
 
     @if ($pesanan->status === 'proses')
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 print:hidden">
         <a href="{{ route('admin.pesanan.edit', $pesanan) }}" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             Edit Pesanan

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BahanController;
+use App\Http\Controllers\GrafikController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\OwnerDashboardController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +66,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // Operasional — Kelola Status (Kanban Board)
     Route::get('/status', [StatusController::class, 'index'])->name('status.index');
     Route::put('/status/{id}/update', [StatusController::class, 'update'])->name('status.update');
+
+    // Pelaporan — Kelola Laporan (Admin creates reports)
+    Route::get('/laporan', [LaporanController::class, 'adminIndex'])->name('laporan.index');
+    Route::post('/laporan/generate', [LaporanController::class, 'generate'])->name('laporan.generate');
+    Route::get('/laporan/{id}', [LaporanController::class, 'show'])->name('laporan.show');
 });
 
 /*
@@ -73,4 +81,19 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 Route::middleware(['auth', 'role:owner'])->prefix('owner')->name('owner.')->group(function () {
     Route::get('/dashboard', [OwnerDashboardController::class, 'index'])->name('dashboard');
+
+    // Pelaporan — Kelola Laporan (Owner views & downloads)
+    Route::get('/laporan', [LaporanController::class, 'ownerIndex'])->name('laporan.index');
+    Route::get('/laporan/{id}/download-pdf', [LaporanController::class, 'downloadPdf'])->name('laporan.download-pdf');
+    Route::get('/laporan/{id}/download-csv', [LaporanController::class, 'downloadCsv'])->name('laporan.download-csv');
+
+    // Visualisasi — Halaman Grafik + Chart.js JSON API Endpoints
+    Route::get('/grafik', [GrafikController::class, 'index'])->name('grafik.index');
+    Route::get('/grafik/prediksi-akurasi/data', [GrafikController::class, 'prediksiAkurasi'])->name('grafik.prediksi-akurasi.data');
+    Route::get('/grafik/volume-transaksi/data', [GrafikController::class, 'volumeTransaksi'])->name('grafik.volume-transaksi.data');
+    Route::get('/grafik/tren-pelanggan/data', [GrafikController::class, 'trenPelanggan'])->name('grafik.tren-pelanggan.data');
+
+    // Kelola Pengguna (Staf Admin) — CRUD
+    Route::resource('users', UserController::class)->except(['show']);
 });
+

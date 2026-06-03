@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mesin;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class MesinController extends Controller
@@ -84,9 +85,14 @@ class MesinController extends Controller
      */
     public function destroy(Mesin $mesin)
     {
-        $mesin->delete();
+        try {
+            $mesin->delete();
 
-        return redirect()->route('admin.mesin.index')
-                         ->with('success', 'Data mesin berhasil dihapus.');
+            return redirect()->route('admin.mesin.index')
+                             ->with('success', 'Data mesin berhasil dihapus.');
+        } catch (QueryException $e) {
+            return redirect()->route('admin.mesin.index')
+                             ->with('error', 'Gagal menghapus mesin \"' . $mesin->nama_mesin . '\". Data masih digunakan oleh sistem.');
+        }
     }
 }

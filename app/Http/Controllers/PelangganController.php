@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class PelangganController extends Controller
@@ -88,9 +89,20 @@ class PelangganController extends Controller
      */
     public function destroy(Pelanggan $pelanggan)
     {
-        $pelanggan->delete();
+        // Cek apakah pelanggan memiliki transaksi terkait
+        if ($pelanggan->detailTransaksi()->exists()) {
+            return redirect()->route('admin.pelanggan.index')
+                             ->with('error', 'Pelanggan "' . $pelanggan->nama . '" tidak dapat dihapus karena masih memiliki data transaksi terkait.');
+        }
 
-        return redirect()->route('admin.pelanggan.index')
-                         ->with('success', 'Data pelanggan berhasil dihapus.');
+        try {
+            $pelanggan->delete();
+
+            return redirect()->route('admin.pelanggan.index')
+                             ->with('success', 'Data pelanggan berhasil dihapus.');
+        } catch (QueryException $e) {
+            return redirect()->route('admin.pelanggan.index')
+                             ->with('error', 'Gagal menghapus pelanggan. Data masih digunakan oleh transaksi lain.');
+        }
     }
 }

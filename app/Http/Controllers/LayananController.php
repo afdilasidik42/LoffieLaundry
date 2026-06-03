@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Layanan;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class LayananController extends Controller
@@ -88,9 +89,20 @@ class LayananController extends Controller
      */
     public function destroy(Layanan $layanan)
     {
-        $layanan->delete();
+        // Cek apakah layanan digunakan di transaksi
+        if ($layanan->detailTransaksi()->exists()) {
+            return redirect()->route('admin.layanan.index')
+                             ->with('error', 'Layanan "' . $layanan->jenis_layanan . '" tidak dapat dihapus karena masih digunakan di data transaksi.');
+        }
 
-        return redirect()->route('admin.layanan.index')
-                         ->with('success', 'Data layanan berhasil dihapus.');
+        try {
+            $layanan->delete();
+
+            return redirect()->route('admin.layanan.index')
+                             ->with('success', 'Data layanan berhasil dihapus.');
+        } catch (QueryException $e) {
+            return redirect()->route('admin.layanan.index')
+                             ->with('error', 'Gagal menghapus layanan. Data masih digunakan oleh transaksi lain.');
+        }
     }
 }

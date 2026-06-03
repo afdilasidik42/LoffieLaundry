@@ -68,17 +68,23 @@
                 <div class="flex items-center gap-2">
                     @php
                         $statusMap = [
-                            'Proses'  => 'bg-yellow-400 text-yellow-900',
-                            'Selesai' => 'bg-emerald-400 text-emerald-900',
-                            'Diambil' => 'bg-sky-400 text-sky-900',
+                            'Proses'  => 'bg-yellow-400 text-yellow-950',
+                            'Selesai' => 'bg-emerald-500 text-white',
+                            'Diambil' => 'bg-blue-600 text-white',
                         ];
-                        $statusClass = $statusMap[$pesanan->status] ?? 'bg-gray-400 text-gray-900';
+                        $normalizedStatus = ucfirst(strtolower($pesanan->status));
+                        $statusClass = $statusMap[$normalizedStatus] ?? 'bg-gray-400 text-gray-900';
+
+                        $detail = $pesanan->detailTransaksi->first();
+                        $namaPelanggan = $detail && $detail->pelanggan ? $detail->pelanggan->nama : '-';
+                        $jenisLayanan = $detail && $detail->layanan ? $detail->layanan->jenis_layanan : '-';
+                        $beratTotal = $pesanan->detailTransaksi->sum('berat');
                     @endphp
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-full {{ $statusClass }}">
-                        @if($pesanan->status === 'Proses')
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-full uppercase {{ $statusClass }}">
+                        @if($normalizedStatus === 'Proses')
                             <span class="w-2 h-2 bg-yellow-700 rounded-full" style="animation: progress-pulse 1.5s ease-in-out infinite;"></span>
                         @endif
-                        {{ $pesanan->status }}
+                        {{ strtoupper($pesanan->status) }}
                     </span>
                 </div>
             </div>
@@ -95,7 +101,7 @@
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 font-medium">Nama Pelanggan</p>
-                            <p class="text-sm font-semibold text-gray-900 mt-0.5">{{ $pesanan->nama_pelanggan }}</p>
+                            <p class="text-sm font-semibold text-gray-900 mt-0.5">{{ $namaPelanggan }}</p>
                         </div>
                     </div>
 
@@ -108,7 +114,7 @@
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 font-medium">Jenis Layanan</p>
-                            <p class="text-sm font-semibold text-gray-900 mt-0.5">{{ $pesanan->jenis_layanan }}</p>
+                            <p class="text-sm font-semibold text-gray-900 mt-0.5">{{ $jenisLayanan }}</p>
                         </div>
                     </div>
 
@@ -121,7 +127,7 @@
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 font-medium">Berat</p>
-                            <p class="text-sm font-semibold text-gray-900 mt-0.5">{{ $pesanan->berat }}</p>
+                            <p class="text-sm font-semibold text-gray-900 mt-0.5">{{ rtrim(rtrim($beratTotal, '0'), '.') }} kg</p>
                         </div>
                     </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Loffie Laundry — Sistem Informasi Laundry berbasis web dengan prediksi waktu selesai menggunakan Grey Prediction GM(1,4).">
+    <meta name="description" content="Loffie Laundry — Sistem Informasi Laundry berbasis web dengan prediksi waktu selesai otomatis.">
     <title>Loffie Laundry — Selamat Datang</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

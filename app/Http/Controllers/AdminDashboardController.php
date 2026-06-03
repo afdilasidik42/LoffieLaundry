@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use App\Models\Pesanan;
 
 class AdminDashboardController extends Controller
 {
@@ -21,22 +22,22 @@ class AdminDashboardController extends Controller
             ],
             [
                 'label'       => 'Total Pesanan Hari Ini',
-                'value'       => 0,
-                'note'        => '(Menunggu Sprint 2)',
+                'value'       => Pesanan::whereDate('created_at', today())->count(),
+                'note'        => null,
                 'icon'        => 'clipboard',
                 'color'       => 'amber',
             ],
             [
                 'label'       => 'Pesanan Aktif',
-                'value'       => 0,
-                'note'        => '(Menunggu Sprint 2)',
+                'value'       => Pesanan::where('status', 'proses')->count(),
+                'note'        => null,
                 'icon'        => 'refresh',
                 'color'       => 'violet',
             ],
             [
                 'label'       => 'Pesanan Selesai',
-                'value'       => 0,
-                'note'        => '(Menunggu Sprint 2)',
+                'value'       => Pesanan::where('status', 'selesai')->count(),
+                'note'        => null,
                 'icon'        => 'check-circle',
                 'color'       => 'emerald',
             ],

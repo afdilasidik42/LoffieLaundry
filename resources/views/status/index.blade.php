@@ -76,7 +76,7 @@
                                 {{ $detail?->berat ?? '-' }}
                             </td>
                             <td class="px-6 py-4 text-gray-600">
-                                {{ $p->estimasi_selesai ? $p->estimasi_selesai->format('d M Y, H:i') : '-' }}
+                                {{ $p->estimasi_selesai ? $p->estimasi_selesai->format('d M Y H:i') : '-' }}
                             </td>
                             
                             {{-- Badge Status --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bahan;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class BahanController extends Controller
@@ -86,9 +87,20 @@ class BahanController extends Controller
      */
     public function destroy(Bahan $bahan)
     {
-        $bahan->delete();
+        // Cek apakah bahan digunakan di transaksi
+        if ($bahan->detailTransaksi()->exists()) {
+            return redirect()->route('admin.bahan.index')
+                             ->with('error', 'Bahan "' . $bahan->nama_bahan . '" tidak dapat dihapus karena masih digunakan di data transaksi.');
+        }
 
-        return redirect()->route('admin.bahan.index')
-                         ->with('success', 'Data bahan berhasil dihapus.');
+        try {
+            $bahan->delete();
+
+            return redirect()->route('admin.bahan.index')
+                             ->with('success', 'Data bahan berhasil dihapus.');
+        } catch (QueryException $e) {
+            return redirect()->route('admin.bahan.index')
+                             ->with('error', 'Gagal menghapus bahan. Data masih digunakan oleh transaksi lain.');
+        }
     }
 }

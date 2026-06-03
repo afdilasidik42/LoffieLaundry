@@ -29,19 +29,6 @@ use App\Models\Pesanan;
 class GmPredictionService
 {
     /**
-     * Fallback duration map (jam) per jenis layanan.
-     *
-     * Used when historical data is insufficient (< 4 completed records)
-     * for the full GM(1,4) algorithm.
-     */
-    private static array $fallbackDurations = [
-        'cuci reguler' => 24.0,
-        'express'      => 6.0,
-        'dry cleaning' => 48.0,
-        'setrika'      => 3.0,
-    ];
-
-    /**
      * Minimum number of historical data points required for GM(1,4).
      *
      * The GM(1,N) model needs at least N data points to form a solvable
@@ -63,7 +50,6 @@ class GmPredictionService
      *                         - berat           (float)  Weight in kg
      *                         - complexity_score (int)    Layanan complexity 1–5
      *                         - kapasitas_mesin  (float)  Machine utilisation %
-     *                         - jenis_layanan    (string) Service type name (for fallback)
      * @return float  Predicted duration in hours (always > 0)
      */
     public static function predict(array $params): float
@@ -71,7 +57,6 @@ class GmPredictionService
         $berat      = (float) ($params['berat'] ?? 0);
         $complexity = (int)   ($params['complexity_score'] ?? 1);
         $kapasitas  = (float) ($params['kapasitas_mesin'] ?? 0);
-        $jenisLayan = strtolower(trim($params['jenis_layanan'] ?? ''));
 
         // ------------------------------------------------------------------
         // Step 1 — Retrieve historical data from completed orders
@@ -80,7 +65,7 @@ class GmPredictionService
 
         if (count($historicalData) < self::MIN_DATA_POINTS) {
             // Insufficient data → return heuristic fallback
-            return self::fallbackEstimate($jenisLayan);
+            return self::fallbackEstimate($complexity);
         }
 
         // Build raw data sequences (0-indexed arrays)
@@ -146,7 +131,7 @@ class GmPredictionService
 
         if ($BtB_inv === null) {
             // Matrix is singular (non-invertible) → fallback
-            return self::fallbackEstimate($jenisLayan);
+            return self::fallbackEstimate($complexity);
         }
 
         $theta = self::matMul($BtB_inv, $BtY);  // 4 × 1
@@ -161,7 +146,7 @@ class GmPredictionService
 
         // Guard: if a ≈ 0, the exponential model degenerates → fallback
         if (abs($a) < 1e-10) {
-            return self::fallbackEstimate($jenisLayan);
+            return self::fallbackEstimate($complexity);
         }
 
         // ------------------------------------------------------------------
@@ -204,7 +189,7 @@ class GmPredictionService
 
         // Ensure prediction is positive and reasonable
         if ($predicted <= 0 || !is_finite($predicted)) {
-            return self::fallbackEstimate($jenisLayan);
+            return self::fallbackEstimate($complexity);
         }
 
         // Round to 4 decimal places
@@ -268,11 +253,11 @@ class GmPredictionService
     }
 
     /**
-     * Return a heuristic fallback duration (in hours) based on service type.
+     * Return a heuristic fallback duration (in hours) based on service complexity.
      */
-    private static function fallbackEstimate(string $jenisLayanan): float
+    private static function fallbackEstimate(int $complexity): float
     {
-        return self::$fallbackDurations[$jenisLayanan] ?? 24.0;
+        return (float) ($complexity * 6.0);
     }
 
     // ========================================================================

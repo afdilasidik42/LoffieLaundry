@@ -63,6 +63,10 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->has('berat')) {
+            $request->merge(['berat' => str_replace(',', '.', $request->input('berat'))]);
+        }
+
         $validated = $request->validate([
             'pelanggan_id'  => ['required', 'exists:pelanggans,id'],
             'layanan_id'    => ['required', 'exists:layanans,id'],
@@ -125,8 +129,8 @@ class PesananController extends Controller
         ]);
 
         // Calculate estimasi_selesai = tanggal_masuk + prediksi_jam hours
-        $tanggalMasuk    = Carbon::parse($validated['tanggal_masuk']);
-        $estimasiSelesai = $tanggalMasuk->copy()->addSeconds((int) round($prediksiJam * 3600));
+        $waktuDasar      = Carbon::parse($validated['tanggal_masuk'])->setTimeFrom(Carbon::now());
+        $estimasiSelesai = $waktuDasar->copy()->addSeconds((int) round($prediksiJam * 3600));
 
         // Update pesanan with the predicted completion datetime
         $pesanan->update([
@@ -194,6 +198,10 @@ class PesananController extends Controller
                              ->with('error', 'Pesanan dengan status "' . $pesanan->status . '" tidak dapat diedit.');
         }
 
+        if ($request->has('berat')) {
+            $request->merge(['berat' => str_replace(',', '.', $request->input('berat'))]);
+        }
+
         $validated = $request->validate([
             'pelanggan_id'  => ['required', 'exists:pelanggans,id'],
             'layanan_id'    => ['required', 'exists:layanans,id'],
@@ -245,8 +253,8 @@ class PesananController extends Controller
             'jenis_layanan'    => $layanan->jenis_layanan,
         ]);
 
-        $tanggalMasuk    = Carbon::parse($validated['tanggal_masuk']);
-        $estimasiSelesai = $tanggalMasuk->copy()->addSeconds((int) round($prediksiJam * 3600));
+        $waktuDasar      = Carbon::parse($validated['tanggal_masuk'])->setTimeFrom(Carbon::now());
+        $estimasiSelesai = $waktuDasar->copy()->addSeconds((int) round($prediksiJam * 3600));
 
         // Update pesanan with new prediction
         $pesanan->update([

@@ -1,0 +1,236 @@
+Nama Customer,Tanggal Masuk,Tanggal Keluar,Lama Proses,Timbangan,Jenis Jasa,Harga,Keterlambatan Pengambilan,Jumlah Transaksi Harian,Jumlah Timbangan Rata-rata
+Dani,2-Sep,5-Sep,3 Hari,6.4 kg,Cuci Kering Setrika,38,0 Hari,5 Customer,5.46 kg
+Bu Nita,2-Sep,2-Sep,1 Hari,7.7 kg,Setrika,38.5,0 Hari,,
+Donna Apart,2-Sep,2-Sep,1 Hari,3.5 kg,Cuci Kering Setrika,27,0 Hari,,
+Rifki,2-Sep,5-Sep,3 Hari,5.6 kg,Setrika,28,0 Hari,,
+Pak Gibran,2-Sep,5-Sep,3 Hari,4.1 kg,Cuci Kering Setrika,24.5,0 Hari,,
+Devina,3-Sep,6-Sep,3 Hari,5.4 kg,Cuci Kering Setrika,32.5,0 Hari,5 Customer,2.56 kg
+Yuli,3-Sep,6-Sep,3 Hari,1 kg,Cuci Kering Setrika,6,0 Hari,,
+Tasya,3-Sep,4-Sep,1 Hari,4.4 kg,Setrika,35,0 Hari,,
+Nadia Baru,3-Sep,6-Sep,3 Hari,2 kg,Cuci Kering Setrika,12,0 Hari,,
+Nadia Baru,3-Sep,6-Sep,3 Hari,2 bedcover,Bedcover,40,0 Hari,,
+Mama Lulu,4-Sep,7-Sep,3 Hari,5.7 kg,Cuci Kering Setrika,34,0 hari,1 Customer,5.7 kg
+Wahyu,5-Sep,8-Sep,3 Hari,4.7 kg,Cuci Kering Setrika,28,0 hari,4 Customer,5.2 kg
+Riki,5-Sep,8-Sep,3 Hari,2,,,,,
+Iis Baru,5-Sep,8-Sep,3 Hari,4.8 kg,Setrika,24,0 hari,,
+Pak RT,5-Sep,8-Sep,3 Hari,9.1 kg,Cuci Kering Setrika,54.5,0 hari,,
+Bang Dus,6-Sep,9-Sep,3 Hari,3.7 kg,Cuci Kering Setrika,22,0 hari,3 Customer,2.7 kg
+Dewa,6-Sep,9-Sep,3 Hari,4.5 kg,Cuci Kering Setrika,27,0 hari,,
+Very,6-Sep,9-Sep,3 Hari,2 Bedcover,Bedcover,35,0 hari,,
+Putra,7-Sep,10-Sep,3 Hari,4.5 kg,Cuci Kering Setrika,27,0 hari,6 Customer,3.25 kg
+Paris,7-Sep,10-Sep,3 Hari,Selimut,Selimut,20,0 hari,,
+Indra,7-Sep,8-Sep,1 Hari,3.9 kg,Cuci Kering Setrika,43,0 hari,,
+Sadiah ,7-Sep,10-Sep,3 Hari,2.2 kg,Cuci Kering Setrika,13,0 hari,,
+Indah,7-Sep,10-Sep,3 Hari,2 Bedcover,Bedcover,40,0 hari,,
+Rai Apart,7-Sep,8-Sep,1 Hari,8.9 kg,Cuci Kering Setrika,107,0 hari,,
+Wahyu,8-Sep,11-Sep,3 Hari,11 kg,Setrika,54,0 hari,1 Customer,11 kg
+Ibu Varidi,9-Sep,12-Sep,3 Hari,4.2 kg,Cuci Kering Setrika,25.5,0 hari,3 Customer,3.1 kg
+Yadi,9-Sep,12-Sep,3 Hari,1.4 kg,Cuci Kering Setrika,8.5,0 hari,,
+Ferdi,9-Sep,12-Sep,3 Hari,3.9 kg,Cuci Kering Setrika,24,0 hari,,
+Rai Apart,10-Sep,11-Sep,1 Hari,6.2 kg,Cuci Kering Setrika,75,0 hari,3 Customer,5.1 kg
+Eli,10-Sep,13-Sep,3 Hari,9,,,,,
+Om Aris,10-Sep,13-Sep,3 Hari,1 Bed Cover + 1 Kapret,Bed Cover + Kapret,90,0 hari,,
+Pendopo,11-Sep,14-Sep,3 Hari,2.8 kg,Cuci Kering Setrika,17,0 hari,4 Customer,1.5 kg
+Juni,11-Sep,14-Sep,3 Hari,1 Bedcover,Bedcover,20,0 hari,,
+Aras,11-Sep,14-Sep,3 Hari,1.8 kg,Cuci Kering ,9,0 hari,,
+Sadiah,11-Sep,14-Sep,3 Hari,1.7 kg,Cuci Kering Setrika,10.5,0 hari,,
+Rama,12-Sep,15-Sep,3 Hari,12 kg,Cuci Kering ,75,0 hari,6 Customer,6.6 kg
+Ratna,12-Sep,15-Sep,3 Hari,1.7 kg,Cuci Kering Setrika,10,0 hari,,
+Novia,12-Sep,15-Sep,3 Hari,7 kg,Cuci Kering Setrika,85.5,0 hari,,
+Wahyu,12-Sep,15-Sep,3 Hari,3.9 kg,Cuci Kering Setrika,23,0 hari,,
+Ita,12-Sep,15-Sep,3 Hari,4.5 kg,Cuci Kering Setrika,27,0 hari,,
+Wahyu Baru,12-Sep,15-Sep,3 Hari,11 kg,Cuci Kering ,54,0 hari,,
+Jihan,13-Sep,15-Sep,2 Hari,1.5 kg,Cuci Kering Setrika,9,0 hari,17 Customer,3.6 kg
+Rama,13-Sep,16-Sep,3 Hari,13 kg,Cuci Kering Setrika,85,0 hari,,
+Zainul,13-Sep,14-Sep,1 Hari,2.2 kg,Cuci Kering Setrika,26.5,0 hari,,
+Salma,13-Sep,16-Sep,3 Hari,4.4 kg,Cuci Kering Setrika,26.5,0 hari,,
+Mumun,13-Sep,16-Sep,3 Hari,3.2 kg,Cuci Kering Setrika,19,0 hari,,
+Tita,13-Sep,16-Sep,3 Hari,3.9 kg,Cuci Kering Setrika,23.5,0 hari,,
+Hendra,13-Sep,16-Sep,3 Hari,3.9 kg,Cuci Kering Setrika,23.5,0 hari,,
+Taqiyyah,13-Sep,16-Sep,3 Hari,5.1 kg,Setrika,25,0 hari,,
+Yadi,13-Sep,16-Sep,3 Hari,1.3 kg,Cuci Kering Setrika,8,0 hari,,
+Variadi,13-Sep,16-Sep,3 Hari,4.2 kg,Cuci Kering Setrika,25,0 hari,,
+Dewa,13-Sep,16-Sep,3 Hari,4.5 kg,Cuci Kering Setrika,27,0 hari,,
+Nai Indriyanti,13-Sep,16-Sep,3 Hari,7 kg,Cuci Kering Setrika,85.5,0 hari,,
+Indah,13-Sep,16-Sep,3 Hari,6.7 kg,Cuci Kering Setrika,40,0 hari,,
+Dini,13-Sep,16-Sep,3 Hari,1.7 kg + 2 Bedcover,Cuci Kering Setrika + BedCover,50,0 hari,,
+Indra,13-Sep,16-Sep,3 Hari,3.4 kg,Cuci Kering Setrika,20.5,0 hari,,
+Salsa,13-Sep,16-Sep,3 Hari,2.5 kg,Cuci Kering Setrika,15,0 hari,,
+Bayu,13-Sep,16-Sep,3 Hari,5.5 kg,Cuci Kering Setrika,33,0 hari,,
+Pak Rt,15-Sep,18-Sep,3 Hari,8.8 kg,Cuci Kering Setrika,52,0 Hari,4 Customer,6.5 kg
+Rifki,15-Sep,18-Sep,3 Hari,2kg + Bedcover,Cuci Kering Setrika,52,0 Hari,,
+Novia,15-Sep,16-Sep,3 Hari,10 kg ,Cuci Kering Setrika,120,0 Hari,,
+Rai Apart,15-Sep,16-Sep,3 Hari,5.3 kg,Cuci Kering Setrika,63.5,0 Hari,,
+Vani,16-Sep,19-Sep,3 Hari,8.2 kg,Cuci Kering Setrika,49,0 Hari,5 Customer,5.5 kg
+Bu Fendi,16-Sep,19-Sep,3 Hari,1,,,,,
+Geby,16-Sep,19-Sep,3 Hari,8.5 kg,Cuci Kering Setrika,51.5,0 Hari,,
+Clara,16-Sep,19-Sep,3 Hari,5.7 kg,Cuci Kering Setrika,34,0 Hari,,
+Saka,16-Sep,19-Sep,3 Hari,3.8 kg,Cuci Kering Setrika,23,0 Hari,,
+Rai Apart,17-Sep,18-Sep,1 Hari,5.5 kg,Cuci Kering Setrika,65.5,0 Hari,3 Customer,4.3 kg
+Wahyu,17-Sep,20-Sep,3 Hari,4 kg,Cuci Kering Setrika,24,0 Hari,,
+Putra,17-Sep,20-Sep,3 Hari,3.4 kg,Cuci Kering Setrika,20.5,0 Hari,,
+Wahyu,18-Sep,21-Sep,3 Hari,10 kg,Setrika,53,0 Hari,1 Customer,10 kg
+Alan,19-Sep,22-Sep,3 Hari,2.1 kg,Cuci Kering Setrika,15,0 Hari,3 Customer,4.4 kg
+Pak Eko,19-Sep,22-Sep,3 Hari,5.8 kg,Cuci Kering Setrika,35,0 Hari,,
+Bayu,19-Sep,22-Sep,3 Hari,5.4 kg,Cuci Kering Setrika,32.5,0 Hari,,
+Ferdi,20-Sep,23-Sep,3 Hari,6.3 kg,Cuci Kering,31.5,0 Hari,3 Customer,5 kg
+Ferdi,20-Sep,23-Sep,3 Hari,2.5 kg,Cuci Kering Setrika,14,0 Hari,,
+Untung,20-Sep,21-Sep,1 Hari,6.3 kg,Cuci Kering Setrika,76.5,0 Hari,,
+Ita,21-Sep,24-Sep,3 Hari,1.6 kg,Cuci Kering Setrika,10,0 Hari,5 Customer,4 kg
+Rai Apart,21-Sep,22-Sep,1 Hari,6.1 kg,Cuci Kering Setrika,73,0 Hari,,
+Edi Express,21-Sep,22-Sep,1 Hari,4.7 kg,Cuci Kering Setrika,56,0 Hari,,
+Reza,21-Sep,24-Sep,3 Hari,Karpet,Karpet,70,0 Hari,,
+Gilang,21-Sep,24-Sep,3 Hari,7.7 kg,Cuci Kering Setrika,46,0 Hari,,
+Iis,22-Sep,25-Sep,3 Hari,4.6 kg,Setrika,23,0 Hari,7 Customer,5.4 kg
+Tasya,22-Sep,25-Sep,3 Hari,4.1 kg,Cuci Kering Setrika,24.5,0 Hari,,
+Beby,22-Sep,25-Sep,3 Hari,6.3 kg,Cuci Kering Setrika,37.5,0 Hari,,
+Putra,22-Sep,25-Sep,3 Hari,4 kg,Cuci Kering Setrika,24,0 Hari,,
+Pak rt,22-Sep,25-Sep,3 Hari,9.6 kg,Cuci Kering Setrika,57.5,0 Hari,,
+Dewi,22-Sep,25-Sep,3 Hari,4.1 kg,Cuci Kering Setrika,24.5,0 Hari,,
+Rai Apart,22-Sep,23-Sep,1 Hari ,5.4 kg,Cuci Kering Setrika,64.5,0 Hari,,
+Ai,23-Sep,26-Sep,3 Hari,5.7 kg,Cuci Kering Setrika,34,0 Hari,2 Customer,5.6 kg
+Akia,23-Sep,26-Sep,3 Hari,5.6 kg,Setrika,28,0 Hari,,
+Herman,25-Sep,28-Sep,3 Hari,6.4 kg,Cuci Kering Setrika,58.5,0 Hari,2 Customer,7.6 kg
+Wahyu,25-Sep,28-Sep,3 Hari,8.9 kg,Setika,44,0 Hari,,
+Geby,26-Sep,29-Sep,3 Hari,7.4 kg,Cuci Kering Setrika,45,0 Hari,3 Customer,6.8 kg
+Rai Apart,26-Sep,27-Sep,1 Hari,9.6 kg,Cuci Kering Setrika,115.5,0 Hari,,
+Cuci,26-Sep,29-Sep,3 Hari,3.5 kg,Cuci Kering Setrika,21,0 Hari,,
+Ragil,27-Sep,28-Sep,1 Hari,2 kg ,Cuci Kering Setrika,24,0 Hari,3 Customer,2 kg
+Putra,27-Sep,30-Sep,3 Hari,4 kg,Cuci Kering Setrika,24,0 Hari,,
+Devi,27-Sep,30-Sep,3 Hari,Bed Cover,Bed Cover,20,0 Hari,,
+Pak Budi Exp,28-Sep,29-Sep,1 Hari,5.8 kg,Setrika,58,0 Hari,11 Customer,7 kg
+Marjuki,28-Sep,1-Oct,3 Hari,Selimut,,,,,
+Rian,28-Sep,1-Oct,3 Hari,2.1 kg,Cuci Kering Setrika,12.5,0 Hari,,
+Lala,28-Sep,1-Oct,3 Hari,24.5 kg,Cuci Kering Setrika,145,0 Hari,,
+Pak Ardi,28-Sep,1-Oct,3 Hari,3 Bedcover,Bedcover,60,0 Hari,,
+Rehan ,28-Sep,1-Oct,3 Hari,6.6 kg,Cuci Kering Setrika,39.5,0 Hari,,
+Pak Gun Apart,28-Sep,29-Sep,1 Hari,6.4 kg,Cuci Kering Setrika,76.5,0 Hari,,
+Dewa,28-Sep,1-Oct,3 Hari,5.7 kg,Cuci Kering Setrika,34.5,0 Hari,,
+Pak Rt,28-Sep,1-Oct,3 Hari,9.4 kg,Cuci Kering Setrika,56,0 Hari,,
+Rai Apart,28-Sep,29-Sep,1 Hari,9.8 kg,Cuci Kering Setrika,117,0 Hari,,
+Indri,28-Sep,1-Oct,3 Hari,7.1 kg,Cuci Kering Setrika,43,0 Hari,,
+Alex,29-Sep,1-Oct,2 Hari,4.6 kg,Cuci Kering Setrika,100.5,0 Hari,1 Customer,4.6 kg
+Raka Exp,30-Sep,1-Oct,1 Hari,8.4 kg,Cuci Kering Setrika,100.5,0 Hari,1 Customer,8.4 kg
+Lala Lulu,1-Oct,4-Oct,3 Hari,8.5 kg,Cuci Kering Setrika,51,0 Hari,3 Customer,7 kg
+Putra,1-Oct,4-Oct,3 Hari,4.2 kg,Cuci Kering Setrika,25,0 Hari,,
+Rai Apart,1-Oct,4-Oct,3 Hari,8.5 kg,Cuci Kering Setrika,138.5,0 Hari,,
+Gendut Express,2-Oct,2-Oct,1 Hari,1.5 kg,Cuci Kering Setrika,18,0 Hari,5 Customer,3.8 kg
+Geby,2-Oct,6-Oct,4 Hari,2.5 kg,Cuci Kering Setrika,15,1 Hari,,
+Azi,2-Oct,9-Oct,6 Hari,1 kg,Cuci Kering Setrika,6,3 hari,,
+Kaita,2-Oct,5-Oct,3 Hari,4.2 kg,Cuci Kering Setrika,25.5,0 Hari,,
+Galuh,2-Oct,3-Oct,1 Hari,10.2 kg,Setrika,51,0 Hari,,
+Alam,3-Oct,6-Oct,3 Hari,2.7 kg,Cuci Kering Setrika,16,0 Hari,6 Customer,4.4 kg
+Sanhiso,3-Oct,7-Oct,4 Hari,1 Bedcover + 1 kg,Setrika + Cuci Kering Setrika,26,1 Hari,,
+Wahyu,3-Oct,8-Oct,5 Hari,3.9 kg,Cuci Kering Setrika,23.5,2 Hari,,
+Rai Apart,3-Oct,6-Oct,3 Hari,5.5 kg,Cuci Kering Setrika,66,0 Hari,,
+Wahyu,3-Oct,5-Oct,2 Hari,10.6 kg, Setrika,53,0 Hari,,
+Pak Ragil,3-Oct,6-Oct,3 Hari,3.2 kg,Cuci Kering Setrika,19,0 Hari,,
+Alip,4-Oct,7-Oct,3 Hari,3.4 kg,Cuci Kering Setrika,20,0 Hari,7 Customer,4.1 kg
+Amel,4-Oct,7-Oct,3 Hari,5.5 kg,Cuci Kering Setrika,33,0 Hari,,
+Bu Loti,4-Oct,8-Oct,4 Hari,1,,,,,
+Ayuu,4-Oct,7-Oct,3 Hari,3.7 kg,Cuci Kering Setrika,22,0 Hari,,
+Hendri,4-Oct,6-Oct,2 Hari,5.3 kg,Cuci Kering Setrika,32,0 Hari,,
+Gendut,4-Oct,5-Oct,1 Hari,3.3 kg,Cuci Kering Setrika,40,0 Hari,,
+Lala lulu,4-Oct,12-Oct,8 Hari,6.4 kg,Cuci Kering Setrika,32,4 Hari,,
+Dani,5-Oct,8-Oct,3 Hari,7 kg,Cuci Kering Setrika,42,0 Hari,3 Customer,5 kg
+Putra,5-Oct,10-Oct,5 Hari,3.9 kg,Cuci Kering Setrika,25,2 Hari,,
+Tika,5-Oct,9-Oct,4 Hari,4.2 kg,Cuci Kering Setrika,25,1 Hari,,
+Geby,6-Oct,10-Oct,4 Hari,8.2 kg,Cuci Kering Setrika,49,1 Hari,4 Customer,7.2 kg
+Amel Express,6-Oct,8-Oct,1 Hari,2,,,,,
+Rai Apart,6-Oct,7-Oct,1 Hari,6,,,,,
+Bu Anjar,6-Oct,8-Oct,2 Hari,12.2 kg,Cuci Kering Setrika,61,0 Hari,,
+Vivi,7-Oct,7-Oct,1 Hari,2.6 kg,Cuci Kering Setrika,15.5,0 Hari,5 Customer,3.4 kg
+Gendut,7-Oct,8-Oct,1 Hari,1.5 kg,Cuci Kering Setrika,17.5,0 Hari,,
+Shiqo,7-Oct,11-Oct,4 Hari,2.4 kg,Cuci Kering Setrika,14.5,1 Hari,,
+Pak Rt,7-Oct,8-Oct,1 Hari,10.7 kg,Cuci Kering Setrika,64,0 Hari,,
+Ferdinan,7-Oct,8-Oct,1 Hari,Bedcover+ Selimut,Bedcover+ Selimut,30,0 Hari,,
+Tolip,8-Oct,11-Oct,3 hari,2.5 kg + Karpet,Cuci Kering Setrika + Karpet,65,0 Hari,3 Customer,2.9 kg
+Vandi,8-Oct,11-Oct,3 hari,1.8 kg,Cuci Kering Setrika,10.5,0 Hari,,
+Ari,8-Oct,15-Oct,7 Hari,4.4 kg,Cuci Kering Setrika,26.5,4 Hari,,
+Lono,9-Oct,12-Oct,3 Hari,6.5 kg,Cuci Kering Setrika,39,0 Hari,2 Customer,7.1 kg
+Bu Anjar,9-Oct,10-Oct,1 Hari,7.8 kg,Setrika,39,0 Hari,,
+Agung,10-Oct,12-Oct,2 Hari,2.1 kg,Cuci Kering Setrika,12,0 Hari,5 Customer,6.6 kg
+Gendut,10-Oct,10-Oct,1 Hari,6.3 kg,Cuci Kering Setrika,76,0 Hari,,
+Ana,10-Oct,11-Oct,1 Hari,6.3 kg,Cuci Kering Setrika,38,1 Hari,,
+Ola ,10-Oct,11-Oct,1 Hari,12,,,,,
+Beby,10-Oct,12-Oct,2 Hari,6.2 kg,Cuci Kering Setrika,37,3 Hari,,
+Untung,11-Oct,12-Oct,1 Hari,6.7 kg,Cuci Kering Setrika,81,0 Hari,3 Customer,3.3 kg
+Jay,11-Oct,12-Oct,1 Hari,3.2 kg,Setrika,30,0 Hari,,
+Adit,11-Oct,12-Oct,1 Hari,Jaket,Jaket,10,0 Hari,,
+Mutiara,12-Oct,12-Oct,1 Hari,Karpet,Karpet,90,0 Hari,11 Customer,3.3 kg
+Wahyu,12-Oct,12-Oct,1 Hari,3.1 kg,Cuci Kering Setrika,38,0 Hari,,
+Pak Gun Apart,12-Oct,15-Oct,3 Hari,6.9 kg,Cuci Kering Setrika,82.5,0 Hari,,
+Bayu,12-Oct,15-Oct,3 Hari,3.4 kg,Cuci Kering Setrika,20,0 Hari,,
+Wiratama,12-Oct,15-Oct,3 Hari,Bedcover+ 1 kg,Bedcover +Cuci Kering Setrika,26,0 Hari,,
+Farah Apart,12-Oct,12-Oct,1 Hari,2 Bedcover + 3.2 kg,Bedcover +Cuci Kering Setrika,138,0 Hari,,
+Bu Dati,12-Oct,15-Oct,3 Hari,Bedcover,Cuci Kering Setrika,20,0 Hari,,
+Hana,12-Oct,17-Oct,5 Hari,1.2 kg,Cuci Kering Setrika,15,2 Hari,,
+Yusuf,12-Oct,13-Oct,1 Hari,4.1 kg,Cuci Kering Setrika,49,0 Hari,,
+Wahyu,12-Oct,15-Oct,3 Hari,9 kg,Cuci Kering Setrika,45,0 Hari,,
+Eko,12-Oct,17-Oct,5 Hari,6.1 kg,Cuci Kering Setrika,37,2 Hari,,
+Lomo,13-Oct,15-Oct,2 Hari,3.2 kg,Cuci Kering Setrika,19.5,0 Hari,3 Customer,3.9 kg
+Pak Dedi,13-Oct,16-Oct,3 Hari,5.5 kg,Cuci Kering Setrika,33,0 Hari,,
+Balu,13-Oct,14-Oct,1 Hari,3 kg, Setrika,40,0 Hari,,
+Ragil,14-Oct,16-Oct,2 Hari,2.7 kg,Cuci Kering Setrika,16,0 Hari,3 Customer,2 kg
+Maudry Apart,14-Oct,14-Oct,1 Hari,Bedcover + 2 Handuk,Cuci Kering Setrika,70,0 Hari,,
+Wahyu,14-Oct,16-Oct,2 Hari,3.4 kg,Setrika,21,0 Hari,,
+Bu Anjar,15-Oct,16-Oct,1 Hari,11.9 kg, Setrika,59.5,0 Hari,3 Customer,9.4 kg
+Galuh,15-Oct,16-Oct,1 Hari,9.9 kg, Setrika,49.5,0 Hari,,
+Geby,15-Oct,20-Oct,5 Hari,6.6 kg,Cuci Kering Setrika,40,2 Hari,,
+Tasya,16-Oct,18-Oct,2 Hari,2.9 kg,Cuci Kering Setrika,17.5,0 Hari,5 Customer,3.3 kg
+Hiarawan,16-Oct,18-Oct,2 Hari,3.7 kg,Cuci Kering Setrika,22,0 Hari,,
+Geby,16-Oct,20-Oct,4 Hari,Bedcover,Bedcoverr,20,1 Hari,,
+Galuh,16-Oct,16-Oct,1 Hari,5.4 kg,Setrika,27,0 Hari,,
+Rai Apart,16-Oct,18-Oct,2 Hari,4.7 kg,Cuci Kering Setrika,56,0 Hari,,
+Tika,17-Oct,19-Oct,2 Hari,3.7 kg,Cuci Kering Setrika,22,0 Hari,1 Customer,3.7 kg
+Dewi,18-Oct,26-Oct,8 Hari,6 kg,Cuci Kering Setrika,72,5 Hari,4  Customer,5.2 kg
+Edi,18-Oct,18-Oct,1 Hari,5.8 kg,Cuci Kering Setrika,58,0 Hari,,
+Bayu,18-Oct,20-Oct,2 Hari,5.2 kg,Cuci Kering Setrika,31,0 Hari,,
+Wahyu,18-Oct,20-Oct,2 Hari,3.8 kg,Cuci Kering Setrika,23,0 Hari,,
+Putra,19-Oct,23-Oct,4 Hari,4 kg,Cuci Kering Setrika,24,1 Hari,5 Customer,5.5 kg
+Nindi,19-Oct,23-Oct,4 Hari,2.8 kg,Cuci Kering Setrika,16.5,1 Hari,,
+Achmad,19-Oct,22-Oct,3 hari,4 kg,Cuci Kering Setrika,24,0 Hari,,
+Rai Apart,19-Oct,19-Oct,1 Hari,5.9 kg,Cuci Kering Setrika,71,0 Hari,,
+Vina,19-Oct,23-Oct,4 Hari,11.2 kg,Cuci Kering Setrika,55,1 Hari,,
+Irma,20-Oct,23-Oct,3 Hari,Bantal,Bantal,20,0 Hari,3 Customer,2.9 kg
+Bu Leni,20-Oct,23-Oct,3 Hari,2 kg,Setrika,10,0 Hari,,
+Geby,20-Oct,23-Oct,3 Hari,6.7 kg,Cuci Kering Setrika,40,0 Hari,,
+Susi,21-Oct,23-Oct,3 Hari,Bedcover,Bedcover,20,0 Hari,1 Customer,(-)
+Geby,22-Oct,24-Oct,2 Hari,Bedcover,Bedcover,40,0 Hari,3 Customer,1.2 kg
+Wiratawan,22-Oct,24-Oct,2 Hari,Bedcover + 2 kg,Bedcover + Cuci Kering Setrika,33,0 Hari,,
+Ainun,22-Oct,24-Oct,2 Hari,1 Seprei + 1,,,,,
+kak Rai,23-Oct,23-Oct,1 Hari,6.5 kg,Cuci Kering Setrika,79,0 Hari,4 Customer,5.5 kg
+Wahyu,23-Oct,23-Oct,1 Hari,12. 5 kg, Setrika,63,0 Hari,,
+Rizki,23-Oct,27-Oct,4 Hari,Selimut + Sprei,Selimut + Sprei,20,1 Hari,,
+Putra,23-Oct,26-Oct,3 Hari,3.3 kg,Cuci Kering Setrika,20,0 Hari,,
+Geby,24-Oct,28-Oct,4 Hari,6.5 kg,Cuci Kering Setrika,39,1 Hari,5 Customer,4 kg
+Ragil,24-Oct,28-Oct,4 Hari,2.5 kg,Cuci Kering Setrika,15,1 Hari,,
+Nicorobin,24-Oct,26-Oct,2 Hari,5.3 kg,Cuci Kering Setrika,32,0 Hari,,
+Pak Gun,24-Oct,26-Oct,2 Hari,5.9 kg,Cuci Kering Setrika,70.5,0 Hari,,
+Fina Apart,24-Oct,26-Oct,2 Hari,1 Bedcover,Bedcover,50,0 Hari,,
+Aldi,25-Oct,26-Oct,1 Hari,5.8 kg,Cuci Kering Setrika,70,0 Hari,6 Customer,3.8 kg
+Tukang Sebelah,25-Oct,26-Oct,1 Hari,3.1 kg,Cuci Kering Setrika,37,0 Hari,,
+Vina Apart,25-Oct,26-Oct,1 Hari,6.1 kg,Cuci Kering Setrika,73,0 Hari,,
+Yuli,25-Oct,27-Oct,2 Hari,2.9 kg,Cuci Kering Setrika,17.5,0 Hari,,
+Rizal,25-Oct,26-Oct,1 Hari,2 kg,Cuci Kering Setrika,12,0 Hari,,
+Yama,25-Oct,26-Oct,1 Hari,3.3 kg,Cuci Kering Setrika,32,0 Hari,,
+Bayu,26-Oct,28-Oct,2 Hari,2.3 kg + 2 Selimiut,Selimut + Cuci Kering Setrika,33.5,0 Hari,5 Customer,5.5 kg
+Rai Apart,26-Oct,26-Oct,1 Hari,5.5 kg,Cuci Kering Setrika,66.5,0 Hari,,
+Untung Express,26-Oct,28-Oct,2 Hari,10 kg,Cuci Kering Setrika,99.5,0 Hari,,
+Wahyu Express,26-Oct,28-Oct,2 Hari,3.9 kg,Cuci Kering Setrika,45.5,0 Hari,,
+Andre Pratama,26-Oct,28-Oct,2 Hari,5.9 kg + Selimut + bedcover,Cuci Kering Setrika + Selimut + Bedcover,95,0 Hari,,
+Nani,27-Oct,28-Oct,1 Hari ,6.1 kg + 5.8 kg,Cuci Kering Setrika + Setrika,66,0 Hari,3 Customer,6.8 kg
+Rai Apart,27-Oct,29-Oct,2 Hari,4.5 kg,Cuci Kering Setrika,54,0 Hari,,
+Putra,27-Oct,29-Oct,2 Hari,4 kg,Cuci Kering Setrika,24,0 Hari,,
+Galih,28-Oct,30-Oct,2 Hari,6.2 kg,Setrika,33,0 Hari,2 Customer,5.8 kg
+Nadia,28-Oct,30-Oct,2 Hari,5.5 kg,Cuci Kering Setrika,50.5,0 Hari,,
+Satya,29-Oct,31-Oct,2 Hari,2 kg,Cuci Kering Setrika,12,0 Hari,2 Customer,4.1 kg
+Galuh,29-Oct,31-Oct,2 Hari,6.2 kg,Cuci Kering Setrika,31,0 Hari,,
+Nani,30-Oct,2-Oct,3 Hari,6,,,,,
+Lulu,30-Oct,2-Oct,3 Hari,5.6 kg,Cuci Kering Setrika,28,0 Hari,,
+Lina,30-Oct,2-Oct,3 Hari,3.5 kg,Cuci Kering Setrika,16,0 Hari,,
+Syifa,30-Oct,2-Oct,3 Hari,3.3 kg,Cuci Kering Setrika,20,0 Hari,,
+Geby,30-Oct,2-Oct,3 Hari,7.4 kg,Cuci Kering Setrika,45,0 Hari,,
+Alam,31-Oct,3-Oct,3 Hari ,2 kg ,Cuci Kering Setrika,12,0 Hari,3 Customer,1.3 kg
+Alif,31-Oct,3-Oct,3 Hari ,2 kg ,Cuci Kering Setrika,17,0 Hari,,
+Geby,31-Oct,3-Oct,3 Hari ,1 bedcover,Bedcover,20,0 Hari,,

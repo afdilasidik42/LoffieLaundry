@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pesanan;
 
 class TrackingController extends Controller
 {
@@ -28,18 +29,11 @@ class TrackingController extends Controller
 
         $idPesanan = strtoupper(trim($request->id_pesanan));
 
-        // --- Mock Logic (akan diganti query Eloquent di Sprint 2) ---
-        if ($idPesanan === 'ORD-MOCK') {
-            $pesanan = (object) [
-                'kode_pesanan'    => 'ORD-MOCK',
-                'nama_pelanggan'  => 'Budi',
-                'jenis_layanan'   => 'Express',
-                'berat'           => '5 kg',
-                'status'          => 'Proses',
-                'estimasi_selesai' => '6 Jam',
-                'tanggal_masuk'   => now()->format('d M Y, H:i'),
-            ];
+        $pesanan = Pesanan::with(['detailTransaksi.layanan', 'detailTransaksi.pelanggan'])
+            ->where('kode_pesanan', $idPesanan)
+            ->first();
 
+        if ($pesanan) {
             return view('tracking.result', compact('pesanan'));
         }
 

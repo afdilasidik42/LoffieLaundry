@@ -111,16 +111,7 @@
             </form>
         </div>
 
-        {{-- Hint --}}
-        <div class="mt-6 bg-blue-50/80 border border-blue-200/60 rounded-xl px-5 py-4 flex items-start gap-3">
-            <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <div>
-                <p class="text-sm font-medium text-blue-800">Demo Mode</p>
-                <p class="text-xs text-blue-700 mt-1">Gunakan ID <code class="bg-blue-200/60 px-1.5 py-0.5 rounded font-mono text-xs font-bold">ORD-MOCK</code> untuk melihat contoh hasil pelacakan.</p>
-            </div>
-        </div>
+
     </main>
 
 </body>

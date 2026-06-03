@@ -2,7 +2,7 @@
 
 @section('title', 'Kelola Layanan')
 @section('page-title', 'Kelola Layanan')
-@section('page-description', 'Katalog layanan laundry — Variabel X3 (complexity_score) digunakan pada algoritma GM(1,4)')
+@section('page-description', 'Katalog layanan laundry beserta tingkat kompleksitas dan harga')
 
 @section('content')
     {{-- Header Actions --}}
