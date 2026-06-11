@@ -214,6 +214,28 @@
                     <span class="nav-tooltip">Kelola Status</span>
                 </a>
 
+                <p class="sidebar-section-title px-3 pt-5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-3">Analitik GM(1,4)</p>
+
+                <a href="{{ route('admin.prediksi.index') }}"
+                   class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg transition-colors duration-200
+                          {{ request()->routeIs('admin.prediksi.*') ? 'bg-sky-600 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="sidebar-label">Riwayat Prediksi</span>
+                    <span class="nav-tooltip">Riwayat Prediksi</span>
+                </a>
+
+                <a href="{{ route('admin.accuracy.index') }}"
+                   class="nav-item flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg transition-colors duration-200
+                          {{ request()->routeIs('admin.accuracy.*') ? 'bg-sky-600 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    <span class="sidebar-label">Uji Akurasi</span>
+                    <span class="nav-tooltip">Uji Akurasi</span>
+                </a>
+
                 <p class="sidebar-section-title px-3 pt-5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-3">Pelaporan</p>
 
                 <a href="{{ route('admin.laporan.index') }}"

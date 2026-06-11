@@ -60,10 +60,13 @@ class StatusController extends Controller
                     'actual_selesai' => $now,
                 ]);
 
-                // 2. Calculate actual_jam = (actual_selesai - created_at) / 3600
-                $createdAt   = Carbon::parse($pesanan->created_at);
-                $diffSeconds = $now->diffInSeconds($createdAt);
-                $actualJam   = $diffSeconds / 3600;
+                // 2. Calculate actual_jam = (actual_selesai - tanggal_masuk) / 3600
+                //    Must use tanggal_masuk (not created_at) to be consistent with
+                //    GmPredictionService::fetchHistoricalData() which uses tanggal_masuk
+                //    for computing historical X1 (durasi_jam) training data.
+                $tanggalMasuk = Carbon::parse($pesanan->tanggal_masuk);
+                $diffSeconds  = $now->diffInSeconds($tanggalMasuk);
+                $actualJam    = $diffSeconds / 3600;
 
                 // 3. Retrieve prediksi_log for this pesanan
                 $prediksiLog = PrediksiLog::where('pesanan_id', $pesanan->id)->first();

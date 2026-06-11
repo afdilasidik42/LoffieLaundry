@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccuracyTestController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BahanController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\MesinController;
 use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\PrediksiController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\UserController;
@@ -28,7 +30,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 // Authentication routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])
@@ -71,6 +73,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/laporan', [LaporanController::class, 'adminIndex'])->name('laporan.index');
     Route::post('/laporan/generate', [LaporanController::class, 'generate'])->name('laporan.generate');
     Route::get('/laporan/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+
+    // Prediksi — Riwayat Prediksi GM(1,4) + Re-run
+    Route::get('/prediksi', [PrediksiController::class, 'index'])->name('prediksi.index');
+    Route::post('/prediksi/{pesanan}/rerun', [PrediksiController::class, 'rerun'])->name('prediksi.rerun');
+
+    // Uji Akurasi — MAPE/MAE Testing
+    Route::get('/accuracy', [AccuracyTestController::class, 'index'])->name('accuracy.index');
+    Route::get('/accuracy/export-csv', [AccuracyTestController::class, 'exportCsv'])->name('accuracy.export-csv');
 });
 
 /*

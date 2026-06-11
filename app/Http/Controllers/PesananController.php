@@ -261,16 +261,17 @@ class PesananController extends Controller
             'estimasi_selesai' => $estimasiSelesai,
         ]);
 
-        // Delete old prediction logs for this pesanan and create new one
-        PrediksiLog::where('pesanan_id', $pesanan->id)->delete();
-
-        PrediksiLog::create([
-            'pesanan_id'       => $pesanan->id,
-            'berat_input'      => $beratInput,
-            'complexity_input' => $complexityInput,
-            'kapasitas_input'  => $kapasitasInput,
-            'prediksi_jam'     => $prediksiJam,
-        ]);
+        // Update or create prediction log (preserves existing actual_jam/mape/mae
+        // if they were already recorded, avoiding accidental data loss)
+        PrediksiLog::updateOrCreate(
+            ['pesanan_id' => $pesanan->id],
+            [
+                'berat_input'      => $beratInput,
+                'complexity_input' => $complexityInput,
+                'kapasitas_input'  => $kapasitasInput,
+                'prediksi_jam'     => $prediksiJam,
+            ]
+        );
 
         return redirect()->route('admin.pesanan.index')
                          ->with('success', 'Pesanan berhasil diperbarui. Estimasi selesai: ' . $estimasiSelesai->format('d M Y H:i'));
@@ -319,18 +320,24 @@ class PesananController extends Controller
     /**
      * Calculate machine capacity utilisation percentage (X4).
      *
-     * Formula: (Jumlah pesanan status 'proses' / Total kapasitas_max mesin aktif) * 100
+     * Formula: (Total berat pesanan status 'proses' / Total kapasitas_max mesin aktif) * 100
+     *
+     * Uses actual weight (kg) instead of order count to accurately represent
+     * machine utilisation. Both numerator and denominator are in kg.
      */
     private function calculateMachineCapacity(): float
     {
-        $totalActiveOrders   = Pesanan::where('status', 'proses')->count();
+        $totalBeratAktif = DetailTransaksi::whereHas('pesanan', function ($query) {
+                $query->where('status', 'proses');
+            })->sum('berat');
+
         $totalMachineCapacity = Mesin::where('is_active', true)->sum('kapasitas_max');
 
         if ($totalMachineCapacity <= 0) {
             return 0.00;
         }
 
-        $percentage = ($totalActiveOrders / $totalMachineCapacity) * 100;
+        $percentage = ($totalBeratAktif / $totalMachineCapacity) * 100;
 
         return round(min($percentage, 100.00), 2);
     }

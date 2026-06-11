@@ -254,10 +254,23 @@ class GmPredictionService
 
     /**
      * Return a heuristic fallback duration (in hours) based on service complexity.
+     *
+     * Used when historical data is insufficient (< 4 records) for GM(1,4).
+     * Values based on typical laundry processing times:
+     *   1 = Cuci Reguler (~24 jam / 1 hari)
+     *   2 = Setrika (~3 jam)
+     *   3 = Express (~6 jam)
+     *   5 = Dry Cleaning (~48 jam / 2 hari)
      */
     private static function fallbackEstimate(int $complexity): float
     {
-        return (float) ($complexity * 6.0);
+        return match ($complexity) {
+            1       => 24.0,
+            2       => 3.0,
+            3       => 6.0,
+            5       => 48.0,
+            default => 12.0,
+        };
     }
 
     // ========================================================================
