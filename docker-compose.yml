@@ -28,19 +28,18 @@ services:
     depends_on:
       - app
 
-  db:
+  mysql:
     image: mysql:8.0
-    container_name: loffielaundry-db
+    container_name: db_loffielaundry
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-db_loffielaundry}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
-      MYSQL_USER: ${DB_USERNAME:-root}
+
     volumes:
       - loffie-mysql-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - loffie-network
 
