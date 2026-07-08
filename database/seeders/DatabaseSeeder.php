@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             MasterDataSeeder::class,
             PesananSeeder::class,
             DatasetPesananSeeder::class,
+            DatasetSeeder::class,
         ]);
     }
 }

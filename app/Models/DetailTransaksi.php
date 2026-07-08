@@ -24,6 +24,7 @@ class DetailTransaksi extends Model
         'layanan_id',
         'bahan_id',
         'berat',
+        'jumlah',
         'harga_per_berat',
         'sub_total',
         'kapasitas_mesin',

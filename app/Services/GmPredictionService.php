@@ -43,18 +43,9 @@ class GmPredictionService
     //  PUBLIC API
     // ========================================================================
 
-    /**
-     * Predict the estimated completion duration in hours using GM(1,4).
-     *
-     * @param  array  $params  Required keys:
-     *                         - berat           (float)  Weight in kg
-     *                         - complexity_score (int)    Layanan complexity 1–5
-     *                         - kapasitas_mesin  (float)  Machine utilisation %
-     * @return float  Predicted duration in hours (always > 0)
-     */
     public static function predict(array $params): float
     {
-        $berat      = (float) ($params['berat'] ?? 0);
+        $beban      = (float) ($params['beban'] ?? 0);
         $complexity = (int)   ($params['complexity_score'] ?? 1);
         $kapasitas  = (float) ($params['kapasitas_mesin'] ?? 0);
 
@@ -70,7 +61,7 @@ class GmPredictionService
 
         // Build raw data sequences (0-indexed arrays)
         $X1 = array_column($historicalData, 'durasi_jam');    // Target: actual hours
-        $X2 = array_column($historicalData, 'berat');         // Weight (kg)
+        $X2 = array_column($historicalData, 'beban');         // Beban (kg/pcs)
         $X3 = array_column($historicalData, 'complexity');    // Complexity score
         $X4 = array_column($historicalData, 'kapasitas');     // Machine capacity %
 
@@ -78,7 +69,7 @@ class GmPredictionService
 
         // Append the new (to-be-predicted) data point's influencing factors
         // We need X2, X3, X4 at position n+1 for the prediction formula
-        $X2[] = $berat;
+        $X2[] = $beban;
         $X3[] = $complexity;
         $X4[] = $kapasitas;
 
@@ -151,12 +142,6 @@ class GmPredictionService
 
         // ------------------------------------------------------------------
         // Step 7 — Discrete solution of GM(1,4)
-        //
-        // X1_hat^(1)(k+1) = [ X1^(0)(1) - (1/a)·Σbi·Xi^(1)(k+1) ] · e^(-a·k)
-        //                   + (1/a)·Σbi·Xi^(1)(k+1)
-        //
-        // where k is 0-indexed (k = 0 gives position 1, k = n-1 gives position n,
-        //        k = n gives the NEW predicted position n+1)
         // ------------------------------------------------------------------
         $X1_hat_ago = [];
         $X1_hat_ago[0] = $X1[0];  // X1_hat^(1)(1) = X1^(0)(1) by definition
@@ -164,28 +149,16 @@ class GmPredictionService
         // Compute fitted values for k=1..n AND prediction at k=n (position n+1)
         // We need positions up to n (0-indexed) in AGO domain
         // X2_ago, X3_ago, X4_ago have length n+1, so index n is valid
-        for ($k = 0; $k <= $n - 1; $k++) {
-            $idx = $k + 1;  // position index (1-indexed: 2..n+1)
+        for ($idx = 1; $idx <= $n; $idx++) {
             $sumBiXi = $b2 * $X2_ago[$idx] + $b3 * $X3_ago[$idx] + $b4 * $X4_ago[$idx];
-            $X1_hat_ago[$idx] = ($X1[0] - $sumBiXi / $a) * exp(-$a * $k) + $sumBiXi / $a;
+            $X1_hat_ago[$idx] = ($X1[0] - $sumBiXi / $a) * exp(-$a * $idx) + $sumBiXi / $a;
         }
 
         // ------------------------------------------------------------------
         // Step 8 — IAGO (Inverse Accumulated Generating Operation)
-        //
-        // X1_hat^(0)(k+1) = X1_hat^(1)(k+1) - X1_hat^(1)(k)
-        //
-        // The predicted new point is at position n (0-indexed in X1_hat_ago)
         // ------------------------------------------------------------------
-        $lastIdx = $n;     // The predicted position index (0-indexed: n)
-        $prevIdx = $n - 1;
-
-        // Compute the predicted AGO value at position n+1 (index n)
-        $sumBiXi_new = $b2 * $X2_ago[$n] + $b3 * $X3_ago[$n] + $b4 * $X4_ago[$n];
-        $X1_hat_ago_new = ($X1[0] - $sumBiXi_new / $a) * exp(-$a * ($n - 1)) + $sumBiXi_new / $a;
-
-        // IAGO: recover the original-scale predicted value
-        $predicted = $X1_hat_ago_new - $X1_hat_ago[$prevIdx];
+        // IAGO: recover the original-scale predicted value at index n
+        $predicted = $X1_hat_ago[$n] - $X1_hat_ago[$n - 1];
 
         // Ensure prediction is positive and reasonable
         if ($predicted <= 0 || !is_finite($predicted)) {
@@ -241,9 +214,17 @@ class GmPredictionService
                 continue;
             }
 
+            $bebanCucian = $detail->layanan->tipe_layanan === 'satuan' 
+                ? (float) $detail->jumlah 
+                : (float) $detail->berat;
+
+            if ($bebanCucian <= 0) {
+                continue;
+            }
+
             $data[] = [
                 'durasi_jam' => round($durasiJam, 4),
-                'berat'      => (float) $detail->berat,
+                'beban'      => $bebanCucian,
                 'complexity' => (int) $detail->layanan->complexity_score,
                 'kapasitas'  => (float) $detail->kapasitas_mesin,
             ];

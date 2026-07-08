@@ -1,0 +1,29 @@
+﻿Jenis Layanan,Lama Pengerjaan,Harga / kg
+Cuci Setrika Reguler,3 hari,6000
+Cuci Setrika Express,1 hari,12000
+Cuci Lipat Reguler,3 Hari,5000
+Cuci Lipat Express,1 hari,10000
+Setrika Reguler,3 hari,5000
+Setrika Express,1 hari,10000
+,,
+ Laundry Satuan ,Lama Pengerjaan,Harga Satuan
+Jaket parasut/bahan ,3 Hari,15000
+Jaket kulit ,3 Hari,20000
+Dres Panjang,3 Hari,20000
+Dres pendek,3 Hari,15000
+Jas pria,3 Hari,15000
+Tas wanita ,3 Hari,25000
+Bedcover besar ,4 - 5 Hari,20000
+Selimut tipis ,3 Hari,10000
+Selimut tebal,3 Hari,15000
+Boneka kecil ,4 - 5 hari,10000
+Boneka medium ,4 - 5 hari,20000
+Boneka besar ,4 - 5 hari,30000
+Boneka Jumbo,4 - 5 hari,50000
+,,
+Mesin ,Brand,Kapasitas Mesin
+Mesin Cuci,LG,8kg
+Mesin Cuci,LG,9 kg
+Mesin Cuci,LG,14 kg
+Mesin Pengering,Lazza,10kg
+Mesin Pengering,Maytag,15 kg

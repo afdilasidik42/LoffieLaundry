@@ -7,8 +7,37 @@
 @section('content')
 <div class="space-y-6">
 
+    {{-- Summary Cards --}}
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        @php
+            $cards = [
+                ['label' => 'Total Prediksi', 'value' => number_format($totalPrediksi), 'color' => 'from-indigo-500 to-blue-600', 'note' => 'semua log'],
+                ['label' => 'Prediksi Selesai', 'value' => number_format($prediksiSelesai), 'color' => 'from-emerald-500 to-teal-600', 'note' => 'ada data aktual'],
+                ['label' => 'Masih Proses', 'value' => number_format($prediksiProses), 'color' => 'from-amber-500 to-orange-600', 'note' => 'belum selesai'],
+                ['label' => 'Rata-rata MAPE', 'value' => $avgMape !== null ? number_format($avgMape, 2) . '%' : 'N/A', 'color' => 'from-sky-500 to-cyan-600', 'note' => 'akurasi overall'],
+            ];
+        @endphp
+
+        @foreach ($cards as $card)
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br {{ $card['color'] }} rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs text-gray-500 font-medium">{{ $card['label'] }}</p>
+                        <p class="text-lg font-bold text-gray-900 mt-0.5 truncate">{{ $card['value'] }}</p>
+                        <p class="text-[10px] text-gray-400 mt-0.5">{{ $card['note'] }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
     {{-- Table --}}
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col max-h-[600px] overflow-hidden">
         <div class="px-6 py-5 border-b border-gray-100">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -23,10 +52,10 @@
             </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-auto main-scroll flex-1">
             <table class="w-full text-left border-collapse whitespace-nowrap">
-                <thead>
-                    <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm">
+                <thead class="sticky top-0 z-10">
+                    <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm shadow-sm">
                         <th class="px-6 py-4 font-semibold w-16">No</th>
                         <th class="px-6 py-4 font-semibold">Kode Pesanan</th>
                         <th class="px-6 py-4 font-semibold">Layanan</th>

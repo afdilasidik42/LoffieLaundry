@@ -80,7 +80,7 @@
     @endif
 
     {{-- Detail Table --}}
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col max-h-[600px] overflow-hidden">
         <div class="px-6 py-5 border-b border-gray-100">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -95,10 +95,10 @@
             </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-auto main-scroll flex-1">
             <table class="w-full text-left border-collapse whitespace-nowrap">
-                <thead>
-                    <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm">
+                <thead class="sticky top-0 z-10">
+                    <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-sm shadow-sm">
                         <th class="px-6 py-4 font-semibold w-16">No</th>
                         <th class="px-6 py-4 font-semibold">Kode Pesanan</th>
                         <th class="px-6 py-4 font-semibold text-right">Berat (kg)</th>

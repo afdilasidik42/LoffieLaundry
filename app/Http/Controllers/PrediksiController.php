@@ -19,7 +19,12 @@ class PrediksiController extends Controller
             ->latest()
             ->paginate(20);
 
-        return view('admin.prediksi.index', compact('logs'));
+        $totalPrediksi   = PrediksiLog::count();
+        $prediksiSelesai = PrediksiLog::whereNotNull('actual_jam')->count();
+        $prediksiProses  = $totalPrediksi - $prediksiSelesai;
+        $avgMape         = $prediksiSelesai > 0 ? PrediksiLog::whereNotNull('actual_jam')->avg('mape') : null;
+
+        return view('admin.prediksi.index', compact('logs', 'totalPrediksi', 'prediksiSelesai', 'prediksiProses', 'avgMape'));
     }
 
     /**
@@ -42,13 +47,13 @@ class PrediksiController extends Controller
                 ->with('error', 'Data detail transaksi atau layanan tidak ditemukan.');
         }
 
-        $beratInput      = (float) $detail->berat;
+        $bebanInput      = $detail->layanan->tipe_layanan === 'satuan' ? (float) $detail->jumlah : (float) $detail->berat;
         $complexityInput = (int) $detail->layanan->complexity_score;
         $kapasitasInput  = (float) $detail->kapasitas_mesin;
 
         // Re-run GM(1,4) prediction
         $prediksiJam = GmPredictionService::predict([
-            'berat'            => $beratInput,
+            'beban'            => $bebanInput,
             'complexity_score' => $complexityInput,
             'kapasitas_mesin'  => $kapasitasInput,
         ]);
@@ -65,7 +70,7 @@ class PrediksiController extends Controller
         PrediksiLog::updateOrCreate(
             ['pesanan_id' => $pesanan->id],
             [
-                'berat_input'      => $beratInput,
+                'berat_input'      => $bebanInput,
                 'complexity_input' => $complexityInput,
                 'kapasitas_input'  => $kapasitasInput,
                 'prediksi_jam'     => $prediksiJam,

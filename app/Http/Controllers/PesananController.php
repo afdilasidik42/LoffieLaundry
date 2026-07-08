@@ -101,28 +101,36 @@ class PesananController extends Controller
                 'estimasi_selesai' => null, // Will be set after GM(1,4) prediction
             ]);
 
-            // Create detail transaksi line item
-            DetailTransaksi::create([
+            $detailData = [
                 'pesanan_id'      => $pesanan->id,
                 'pelanggan_id'    => $validated['pelanggan_id'],
                 'layanan_id'      => $validated['layanan_id'],
                 'bahan_id'        => $validated['bahan_id'] ?: null,
-                'berat'           => $validated['berat'],
                 'harga_per_berat' => $hargaPerBerat,
                 'sub_total'       => $subTotal,
                 'kapasitas_mesin' => $kapasitasMesin,
-            ]);
+            ];
+
+            if ($layanan->tipe_layanan === 'satuan') {
+                $detailData['jumlah'] = (int) $validated['berat'];
+                $detailData['berat']  = 0;
+            } else {
+                $detailData['jumlah'] = null;
+                $detailData['berat']  = $validated['berat'];
+            }
+
+            DetailTransaksi::create($detailData);
 
             return $pesanan;
         });
 
         // ── GM(1,4) Prediction (after commit) ───────────────────────────
-        $beratInput      = (float) $validated['berat'];
+        $bebanInput      = (float) $validated['berat']; // We reuse 'berat' input as generic load
         $complexityInput = (int) $layanan->complexity_score;
         $kapasitasInput  = $kapasitasMesin;
 
         $prediksiJam = GmPredictionService::predict([
-            'berat'            => $beratInput,
+            'beban'            => $bebanInput,
             'complexity_score' => $complexityInput,
             'kapasitas_mesin'  => $kapasitasInput,
             'jenis_layanan'    => $layanan->jenis_layanan,
@@ -140,7 +148,7 @@ class PesananController extends Controller
         // Store prediction audit log
         PrediksiLog::create([
             'pesanan_id'       => $pesanan->id,
-            'berat_input'      => $beratInput,
+            'berat_input'      => $bebanInput,
             'complexity_input' => $complexityInput,
             'kapasitas_input'  => $kapasitasInput,
             'prediksi_jam'     => $prediksiJam,
@@ -220,34 +228,46 @@ class PesananController extends Controller
         $kapasitasMesin = $this->calculateMachineCapacity();
 
         // ── DB Transaction ──────────────────────────────────────────────
-        DB::transaction(function () use ($pesanan, $validated, $subTotal, $hargaPerBerat, $kapasitasMesin) {
+        DB::transaction(function () use ($pesanan, $validated, $layanan, $subTotal, $hargaPerBerat, $kapasitasMesin) {
             $pesanan->update([
                 'tanggal_masuk'    => $validated['tanggal_masuk'],
                 'total_biaya'      => $subTotal,
             ]);
 
+            $detailData = [
+                'pesanan_id'      => $pesanan->id,
+                'pelanggan_id'    => $validated['pelanggan_id'],
+                'layanan_id'      => $validated['layanan_id'],
+                'bahan_id'        => $validated['bahan_id'] ?: null,
+                'harga_per_berat' => $hargaPerBerat,
+                'sub_total'       => $subTotal,
+                'kapasitas_mesin' => $kapasitasMesin,
+            ];
+
+            if ($layanan->tipe_layanan === 'satuan') {
+                $detailData['jumlah'] = (int) $validated['berat'];
+                $detailData['berat']  = 0;
+            } else {
+                $detailData['jumlah'] = null;
+                $detailData['berat']  = $validated['berat'];
+            }
+
             // Update the first detail line item
             $detail = $pesanan->detailTransaksi()->first();
             if ($detail) {
-                $detail->update([
-                    'pelanggan_id'    => $validated['pelanggan_id'],
-                    'layanan_id'      => $validated['layanan_id'],
-                    'bahan_id'        => $validated['bahan_id'] ?: null,
-                    'berat'           => $validated['berat'],
-                    'harga_per_berat' => $hargaPerBerat,
-                    'sub_total'       => $subTotal,
-                    'kapasitas_mesin' => $kapasitasMesin,
-                ]);
+                $detail->update($detailData);
+            } else {
+                DetailTransaksi::create($detailData);
             }
         });
 
         // ── Re-trigger GM(1,4) Prediction (after commit) ────────────────
-        $beratInput      = (float) $validated['berat'];
+        $bebanInput      = (float) $validated['berat'];
         $complexityInput = (int) $layanan->complexity_score;
         $kapasitasInput  = $kapasitasMesin;
 
         $prediksiJam = GmPredictionService::predict([
-            'berat'            => $beratInput,
+            'beban'            => $bebanInput,
             'complexity_score' => $complexityInput,
             'kapasitas_mesin'  => $kapasitasInput,
             'jenis_layanan'    => $layanan->jenis_layanan,
@@ -266,7 +286,7 @@ class PesananController extends Controller
         PrediksiLog::updateOrCreate(
             ['pesanan_id' => $pesanan->id],
             [
-                'berat_input'      => $beratInput,
+                'berat_input'      => $bebanInput,
                 'complexity_input' => $complexityInput,
                 'kapasitas_input'  => $kapasitasInput,
                 'prediksi_jam'     => $prediksiJam,
