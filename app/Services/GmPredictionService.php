@@ -39,6 +39,12 @@ class GmPredictionService
      */
     private const MIN_DATA_POINTS = 4;
 
+    /**
+     * Maximum number of most-recent completed orders to ever load from the
+     * database in one go (safety cap so this doesn't grow unbounded forever).
+     */
+    private const MAX_HISTORICAL_CAP = 300;
+
     // ========================================================================
     //  PUBLIC API
     // ========================================================================
@@ -50,13 +56,56 @@ class GmPredictionService
         $kapasitas  = (float) ($params['kapasitas_mesin'] ?? 0);
 
         // ------------------------------------------------------------------
-        // Step 1 — Retrieve historical data from completed orders
+        // Fetch the full available history ONCE (chronological order), then
+        // try EVERY possible training-window size in memory (no repeated DB
+        // queries). The GM(1,N) discrete solution's exp(-a*k) term can
+        // diverge depending on which specific records fall inside a given
+        // window — empirically, no small hand-picked set of window sizes
+        // is reliably stable (see BAB IV 4.2.2/4.3.3 for the empirical
+        // justification: 8 hand-picked candidates still failed consistently
+        // once new orders shifted the data composition). Exhaustively trying
+        // every window size from MIN_DATA_POINTS up to the full available
+        // count maximises the chance of finding a numerically valid result,
+        // and is cheap since each attempt is pure in-memory array/matrix
+        // work (no DB round-trip).
         // ------------------------------------------------------------------
-        $historicalData = self::fetchHistoricalData();
+        $allHistorical = self::fetchAllHistoricalData();
+        $maxAvailable  = count($allHistorical);
 
-        if (count($historicalData) < self::MIN_DATA_POINTS) {
-            // Insufficient data → return heuristic fallback
+        if ($maxAvailable < self::MIN_DATA_POINTS) {
+            \Log::warning("[GM14] Data historis kurang dari minimum ({$maxAvailable} < " . self::MIN_DATA_POINTS . ") -> FALLBACK (beban={$beban}, complexity={$complexity}, kapasitas={$kapasitas})");
             return self::fallbackEstimate($complexity);
+        }
+
+        for ($window = self::MIN_DATA_POINTS; $window <= $maxAvailable; $window++) {
+            $slice = array_slice($allHistorical, -$window); // most recent $window records, chronological order preserved
+
+            $predicted = self::attemptPrediction($slice, $beban, $complexity, $kapasitas);
+
+            if ($predicted !== null) {
+                \Log::info("[GM14] SUKSES pakai window={$window} (dari {$maxAvailable} data tersedia) -> prediksi={$predicted} jam (beban={$beban}, complexity={$complexity}, kapasitas={$kapasitas})");
+                return $predicted;
+            }
+        }
+
+        // Every single window size failed → heuristic fallback
+        \Log::warning("[GM14] SEMUA window (4 s.d. {$maxAvailable}) gagal -> FALLBACK dipakai (beban={$beban}, complexity={$complexity}, kapasitas={$kapasitas})");
+        return self::fallbackEstimate($complexity);
+    }
+
+    /**
+     * Attempt a single GM(1,4) prediction using a specific slice of
+     * historical data. Returns null (instead of falling back) on any
+     * numerical failure, so the caller (predict()) can try the next
+     * candidate window size.
+     */
+    private static function attemptPrediction(array $historicalData, float $beban, int $complexity, float $kapasitas): ?float
+    {
+        // ------------------------------------------------------------------
+        // Step 1 — historical data already provided by caller
+        // ------------------------------------------------------------------
+        if (count($historicalData) < self::MIN_DATA_POINTS) {
+            return null;
         }
 
         // Build raw data sequences (0-indexed arrays)
@@ -121,8 +170,8 @@ class GmPredictionService
         $BtB_inv = self::matInverse($BtB);       // 4 × 4
 
         if ($BtB_inv === null) {
-            // Matrix is singular (non-invertible) → fallback
-            return self::fallbackEstimate($complexity);
+            // Matrix is singular (non-invertible) → let predict() try another window
+            return null;
         }
 
         $theta = self::matMul($BtB_inv, $BtY);  // 4 × 1
@@ -135,9 +184,9 @@ class GmPredictionService
         $b3 = $theta[2][0];   // driving coefficient for X3
         $b4 = $theta[3][0];   // driving coefficient for X4
 
-        // Guard: if a ≈ 0, the exponential model degenerates → fallback
+        // Guard: if a ≈ 0, the exponential model degenerates → let predict() try another window
         if (abs($a) < 1e-10) {
-            return self::fallbackEstimate($complexity);
+            return null;
         }
 
         // ------------------------------------------------------------------
@@ -162,7 +211,7 @@ class GmPredictionService
 
         // Ensure prediction is positive and reasonable (max 240 hours / 10 days)
         if ($predicted <= 0 || !is_finite($predicted) || $predicted > 240) {
-            return self::fallbackEstimate($complexity);
+            return null;
         }
 
         // Round to 4 decimal places
@@ -184,27 +233,32 @@ class GmPredictionService
      *
      * Only orders where actual_selesai IS NOT NULL are included.
      * Ordered by created_at ASC (oldest first) for proper time-series.
+     * Capped at MAX_HISTORICAL_CAP most-recent records for safety.
      *
      * @return array<int, array{durasi_jam: float, berat: float, complexity: int, kapasitas: float}>
      */
-    private static function fetchHistoricalData(): array
+    private static function fetchAllHistoricalData(): array
     {
-        $window = (int) env('GM_TRAINING_WINDOW', 30);
-
         $completedOrders = Pesanan::with(['detailTransaksi.layanan'])
             ->whereNotNull('actual_selesai')
             ->orderBy('created_at', 'desc') // Fetch newest first
-            ->limit($window)
+            ->limit(self::MAX_HISTORICAL_CAP)
             ->get()
             ->reverse() // Restore chronological order for AGO
             ->values(); // Reset array keys
 
+        \Log::info("[GM14-DEBUG] Query mentah mengembalikan " . $completedOrders->count() . " baris pesanan");
+
         $data = [];
+        $skippedNoDetail = 0;
+        $skippedBadDuration = 0;
+        $skippedBadBeban = 0;
 
         foreach ($completedOrders as $pesanan) {
             $detail = $pesanan->detailTransaksi->first();
 
             if (!$detail || !$detail->layanan) {
+                $skippedNoDetail++;
                 continue;
             }
 
@@ -212,10 +266,11 @@ class GmPredictionService
             $tanggalMasuk  = $pesanan->tanggal_masuk;
             $actualSelesai = $pesanan->actual_selesai;
 
-            $durasiJam = $actualSelesai->diffInSeconds($tanggalMasuk) / 3600.0;
+            $durasiJam = $actualSelesai->diffInSeconds($tanggalMasuk, true) / 3600.0;
 
             // Skip zero/negative durations (data anomalies)
             if ($durasiJam <= 0) {
+                $skippedBadDuration++;
                 continue;
             }
 
@@ -224,6 +279,7 @@ class GmPredictionService
                 : (float) $detail->berat;
 
             if ($bebanCucian <= 0) {
+                $skippedBadBeban++;
                 continue;
             }
 
@@ -235,21 +291,68 @@ class GmPredictionService
             ];
         }
 
+        \Log::info("[GM14-DEBUG] Setelah filter: " . count($data) . " valid | dilewati -> tanpa detail/layanan: {$skippedNoDetail}, durasi tidak valid: {$skippedBadDuration}, beban tidak valid: {$skippedBadBeban}");
+
         return $data;
     }
 
     /**
-     * Return a heuristic fallback duration (in hours) based on service complexity.
+     * Return a fallback duration (in hours) based on service complexity.
      *
-     * Used when historical data is insufficient (< 4 records) for GM(1,4).
-     * Values based on typical laundry processing times:
-     *   1 = Cuci Reguler (~24 jam / 1 hari)
-     *   2 = Setrika (~3 jam)
-     *   3 = Express (~6 jam)
-     *   5 = Dry Cleaning (~48 jam / 2 hari)
+     * Used when GM(1,4) is numerically invalid for every candidate window.
+     *
+     * IMPORTANT: This is NOT a fixed heuristic table. It computes the
+     * average actual duration (durasi_jam) from ALL completed orders with
+     * the same complexity score, drawn from the real historical dataset.
+     * This was changed after empirical testing showed the old hardcoded
+     * table (24/3/6/48/12 jam) was dramatically wrong compared to real
+     * data — e.g. complexity=3 (Express-type services) averaged ~63.8 jam
+     * in the real dataset, not the hardcoded 6.0 jam. Using a data-driven
+     * average keeps the fallback a defensible, grounded baseline rather
+     * than an arbitrary guess, even though it is simpler than a full
+     * GM(1,4) fit.
+     *
+     * Falls back further to the old hardcoded table ONLY if fewer than
+     * MIN_SAMPLES_FOR_AVERAGE real records exist for that complexity
+     * (e.g. a brand-new layanan with no completed orders yet).
      */
+    private const MIN_SAMPLES_FOR_AVERAGE = 3;
+
     private static function fallbackEstimate(int $complexity): float
     {
+        $completedOrders = Pesanan::with(['detailTransaksi.layanan'])
+            ->whereNotNull('actual_selesai')
+            ->get();
+
+        $durations = [];
+
+        foreach ($completedOrders as $pesanan) {
+            $detail = $pesanan->detailTransaksi->first();
+
+            if (!$detail || !$detail->layanan) {
+                continue;
+            }
+
+            if ((int) $detail->layanan->complexity_score !== $complexity) {
+                continue;
+            }
+
+            $durasiJam = $pesanan->actual_selesai->diffInSeconds($pesanan->tanggal_masuk, true) / 3600.0;
+
+            if ($durasiJam > 0) {
+                $durations[] = $durasiJam;
+            }
+        }
+
+        if (count($durations) >= self::MIN_SAMPLES_FOR_AVERAGE) {
+            $average = array_sum($durations) / count($durations);
+            \Log::info("[GM14] Fallback pakai RATA-RATA RIIL complexity={$complexity}: {$average} jam (n=" . count($durations) . ")");
+            return round($average, 4);
+        }
+
+        // Not enough real data for this complexity yet → old hardcoded table
+        \Log::info("[GM14] Fallback pakai TABEL HARDCODED complexity={$complexity} (data riil kurang dari " . self::MIN_SAMPLES_FOR_AVERAGE . ")");
+
         return match ($complexity) {
             1       => 24.0,
             2       => 3.0,
