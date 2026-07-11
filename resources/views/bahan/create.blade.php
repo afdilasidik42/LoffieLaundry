@@ -23,7 +23,7 @@
                     </label>
                     <input type="text" name="kode_bahan" id="kode_bahan"
                            value="{{ old('kode_bahan', $kodeBahan) }}"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 font-mono transition-colors"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 font-mono transition-colors"
                            readonly>
                     @error('kode_bahan')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -38,7 +38,7 @@
                     <input type="text" name="nama_bahan" id="nama_bahan"
                            value="{{ old('nama_bahan') }}"
                            placeholder="Contoh: Detergen, Pewangi, Pemutih"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('nama_bahan') border-red-400 @enderror"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('nama_bahan') border-red-400 @enderror"
                            required>
                     @error('nama_bahan')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -56,7 +56,7 @@
                                value="{{ old('biaya_per_kg') }}"
                                placeholder="0"
                                step="0.01" min="0"
-                               class="w-full pl-12 pr-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('biaya_per_kg') border-red-400 @enderror"
+                               class="w-full pl-12 pr-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('biaya_per_kg') border-red-400 @enderror"
                                required>
                     </div>
                     @error('biaya_per_kg')

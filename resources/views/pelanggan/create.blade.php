@@ -23,7 +23,7 @@
                     </label>
                     <input type="text" name="kode_pelanggan" id="kode_pelanggan"
                            value="{{ old('kode_pelanggan', $kodePelanggan) }}"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 font-mono transition-colors"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 font-mono transition-colors"
                            readonly>
                     @error('kode_pelanggan')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -38,7 +38,7 @@
                     <input type="text" name="nama" id="nama"
                            value="{{ old('nama') }}"
                            placeholder="Masukkan nama lengkap pelanggan"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('nama') border-red-400 @enderror"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('nama') border-red-400 @enderror"
                            required>
                     @error('nama')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -53,7 +53,7 @@
                     <input type="text" name="no_telepon" id="no_telepon"
                            value="{{ old('no_telepon') }}"
                            placeholder="Contoh: 08123456789"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('no_telepon') border-red-400 @enderror">
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('no_telepon') border-red-400 @enderror">
                     @error('no_telepon')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror
@@ -66,7 +66,7 @@
                     </label>
                     <textarea name="alamat" id="alamat" rows="3"
                               placeholder="Masukkan alamat lengkap pelanggan"
-                              class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors resize-none @error('alamat') border-red-400 @enderror">{{ old('alamat') }}</textarea>
+                              class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors resize-none @error('alamat') border-red-400 @enderror">{{ old('alamat') }}</textarea>
                     @error('alamat')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror

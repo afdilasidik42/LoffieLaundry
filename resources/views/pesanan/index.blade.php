@@ -15,7 +15,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                     <input type="text" name="search" value="{{ $search }}" placeholder="Cari kode pesanan atau nama pelanggan..."
-                           class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors" id="search-pesanan">
+                           class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors" id="search-pesanan">
                     @if ($status)
                         <input type="hidden" name="status" value="{{ $status }}">
                     @endif
@@ -81,8 +81,8 @@
                             $pelanggan = $detail?->pelanggan;
                             $layanan   = $detail?->layanan;
                         @endphp
-                        <tr class="hover:bg-sky-50/50 transition-colors duration-150" id="row-pesanan-{{ $pesanan->id }}">
-                            <td class="px-6 py-4 text-gray-500">{{ $pesanans->firstItem() + $index }}</td>
+                        <tr class="group hover:bg-sky-50/60 transition-colors duration-200" id="row-pesanan-{{ $pesanan->id }}">
+                            <td class="px-6 py-4 text-gray-500 group-hover:text-sky-600 transition-colors">{{ $pesanans->firstItem() + $index }}</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex px-2.5 py-1 bg-violet-100 text-violet-700 text-xs font-mono font-semibold rounded-lg">
                                     {{ $pesanan->kode_pesanan }}
@@ -142,13 +142,19 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-6 py-12 text-center">
-                                <div class="flex flex-col items-center">
-                                    <svg class="w-12 h-12 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                    </svg>
-                                    <p class="text-gray-500 text-sm">Belum ada data pesanan.</p>
-                                    <a href="{{ route('admin.pesanan.create') }}" class="mt-2 text-sky-600 hover:text-sky-700 text-sm font-medium">+ Buat Pesanan Baru</a>
+                            <td colspan="9" class="px-6 py-16 text-center">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 bg-sky-50 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-gray-900 font-semibold text-base">Belum ada pesanan</p>
+                                    <p class="text-gray-500 text-sm mt-1 max-w-sm">Mulai kelola laundry Anda dengan membuat pesanan baru sekarang.</p>
+                                    <a href="{{ route('admin.pesanan.create') }}" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-sky-600 transition-colors shadow-sm">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                                        Buat Pesanan Baru
+                                    </a>
                                 </div>
                             </td>
                         </tr>

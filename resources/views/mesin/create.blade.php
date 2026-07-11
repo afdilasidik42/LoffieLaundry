@@ -24,7 +24,7 @@
                     <input type="text" name="nama_mesin" id="nama_mesin"
                            value="{{ old('nama_mesin') }}"
                            placeholder="Contoh: Mesin Cuci Front Load #1"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('nama_mesin') border-red-400 @enderror"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('nama_mesin') border-red-400 @enderror"
                            required>
                     @error('nama_mesin')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -40,7 +40,7 @@
                            value="{{ old('kapasitas_max') }}"
                            placeholder="Contoh: 15"
                            min="1"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('kapasitas_max') border-red-400 @enderror"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('kapasitas_max') border-red-400 @enderror"
                            required>
                     @error('kapasitas_max')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>

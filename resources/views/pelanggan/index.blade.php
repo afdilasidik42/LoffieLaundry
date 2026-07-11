@@ -14,7 +14,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
                 <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama atau kode pelanggan..."
-                       class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors" id="search-pelanggan">
+                       class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors" id="search-pelanggan">
             </div>
         </form>
 
@@ -44,8 +44,8 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @forelse ($pelanggans as $index => $pelanggan)
-                        <tr class="hover:bg-sky-50/50 transition-colors duration-150" id="row-pelanggan-{{ $pelanggan->id }}">
-                            <td class="px-6 py-4 text-gray-500">{{ $pelanggans->firstItem() + $index }}</td>
+                        <tr class="group hover:bg-sky-50/60 transition-colors duration-200" id="row-pelanggan-{{ $pelanggan->id }}">
+                            <td class="px-6 py-4 text-gray-500 group-hover:text-sky-600 transition-colors">{{ $pelanggans->firstItem() + $index }}</td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex px-2.5 py-1 bg-sky-100 text-sky-700 text-xs font-mono font-semibold rounded-lg">
                                     {{ $pelanggan->kode_pelanggan }}
@@ -78,13 +78,19 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center">
-                                <div class="flex flex-col items-center">
-                                    <svg class="w-12 h-12 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    </svg>
-                                    <p class="text-gray-500 text-sm">Belum ada data pelanggan.</p>
-                                    <a href="{{ route('admin.pelanggan.create') }}" class="mt-2 text-sky-600 hover:text-sky-700 text-sm font-medium">+ Tambah Pelanggan Baru</a>
+                            <td colspan="6" class="px-6 py-16 text-center">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 bg-sky-50 rounded-full flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-gray-900 font-semibold text-base">Belum ada pelanggan</p>
+                                    <p class="text-gray-500 text-sm mt-1 max-w-sm">Data pelanggan Anda akan muncul di sini. Tambahkan data baru untuk mulai.</p>
+                                    <a href="{{ route('admin.pelanggan.create') }}" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-sky-600 transition-colors shadow-sm">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                                        Tambah Pelanggan
+                                    </a>
                                 </div>
                             </td>
                         </tr>

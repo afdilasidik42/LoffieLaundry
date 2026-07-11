@@ -23,7 +23,7 @@
                     </label>
                     <input type="date" name="tanggal_masuk" id="tanggal_masuk"
                            value="{{ old('tanggal_masuk', date('Y-m-d')) }}"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('tanggal_masuk') border-red-400 @enderror"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('tanggal_masuk') border-red-400 @enderror"
                            required>
                     @error('tanggal_masuk')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -36,7 +36,7 @@
                         Pelanggan <span class="text-red-500">*</span>
                     </label>
                     <select name="pelanggan_id" id="pelanggan_id"
-                            class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('pelanggan_id') border-red-400 @enderror"
+                            class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('pelanggan_id') border-red-400 @enderror"
                             required>
                         <option value="">— Pilih Pelanggan —</option>
                         @foreach ($pelanggans as $pelanggan)
@@ -56,7 +56,7 @@
                         Jenis Layanan <span class="text-red-500">*</span>
                     </label>
                     <select name="layanan_id" id="layanan_id"
-                            class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('layanan_id') border-red-400 @enderror"
+                            class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('layanan_id') border-red-400 @enderror"
                             required>
                         <option value="" data-harga="0">— Pilih Layanan —</option>
                         @foreach ($layanans as $layanan)
@@ -78,7 +78,7 @@
                         Bahan Tambahan
                     </label>
                     <select name="bahan_id" id="bahan_id"
-                            class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('bahan_id') border-red-400 @enderror">
+                            class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('bahan_id') border-red-400 @enderror">
                         <option value="" data-biaya="0">— Tanpa Bahan Tambahan —</option>
                         @foreach ($bahans as $bahan)
                             <option value="{{ $bahan->id }}"
@@ -102,7 +102,7 @@
                            value="{{ old('berat') }}"
                            placeholder="Contoh: 3.5"
                            step="0.01" min="0.1" max="9999.99"
-                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('berat') border-red-400 @enderror"
+                           class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('berat') border-red-400 @enderror"
                            required>
                     @error('berat')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>

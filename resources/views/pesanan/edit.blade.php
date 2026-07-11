@@ -20,14 +20,14 @@
             <div>
                 <label for="tanggal_masuk" class="block text-sm font-medium text-gray-700 mb-1.5">Tanggal Masuk <span class="text-red-500">*</span></label>
                 <input type="date" name="tanggal_masuk" id="tanggal_masuk" value="{{ old('tanggal_masuk', $pesanan->tanggal_masuk->format('Y-m-d')) }}"
-                       class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('tanggal_masuk') border-red-400 @enderror" required>
+                       class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('tanggal_masuk') border-red-400 @enderror" required>
                 @error('tanggal_masuk') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
             </div>
 
             {{-- Pelanggan --}}
             <div>
                 <label for="pelanggan_id" class="block text-sm font-medium text-gray-700 mb-1.5">Pelanggan <span class="text-red-500">*</span></label>
-                <select name="pelanggan_id" id="pelanggan_id" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('pelanggan_id') border-red-400 @enderror" required>
+                <select name="pelanggan_id" id="pelanggan_id" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('pelanggan_id') border-red-400 @enderror" required>
                     <option value="">— Pilih Pelanggan —</option>
                     @foreach ($pelanggans as $pelanggan)
                         <option value="{{ $pelanggan->id }}" {{ old('pelanggan_id', $detail->pelanggan_id) == $pelanggan->id ? 'selected' : '' }}>
@@ -41,7 +41,7 @@
             {{-- Layanan --}}
             <div>
                 <label for="layanan_id" class="block text-sm font-medium text-gray-700 mb-1.5">Jenis Layanan <span class="text-red-500">*</span></label>
-                <select name="layanan_id" id="layanan_id" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('layanan_id') border-red-400 @enderror" required>
+                <select name="layanan_id" id="layanan_id" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('layanan_id') border-red-400 @enderror" required>
                     <option value="" data-harga="0">— Pilih Layanan —</option>
                     @foreach ($layanans as $layanan)
                         <option value="{{ $layanan->id }}" data-harga="{{ $layanan->harga }}" {{ old('layanan_id', $detail->layanan_id) == $layanan->id ? 'selected' : '' }}>
@@ -55,7 +55,7 @@
             {{-- Bahan --}}
             <div>
                 <label for="bahan_id" class="block text-sm font-medium text-gray-700 mb-1.5">Bahan Tambahan</label>
-                <select name="bahan_id" id="bahan_id" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('bahan_id') border-red-400 @enderror">
+                <select name="bahan_id" id="bahan_id" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('bahan_id') border-red-400 @enderror">
                     <option value="" data-biaya="0">— Tanpa Bahan Tambahan —</option>
                     @foreach ($bahans as $bahan)
                         <option value="{{ $bahan->id }}" data-biaya="{{ $bahan->biaya_per_kg }}" {{ old('bahan_id', $detail->bahan_id) == $bahan->id ? 'selected' : '' }}>
@@ -70,7 +70,7 @@
             <div>
                 <label for="berat" class="block text-sm font-medium text-gray-700 mb-1.5">Berat (kg) <span class="text-red-500">*</span></label>
                 <input type="number" name="berat" id="berat" value="{{ old('berat', $detail->berat) }}" step="0.01" min="0.1" max="9999.99"
-                       class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-colors @error('berat') border-red-400 @enderror" required>
+                       class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500/40 focus:border-sky-500 transition-colors @error('berat') border-red-400 @enderror" required>
                 @error('berat') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
             </div>
 

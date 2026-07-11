@@ -98,13 +98,18 @@
                 <button
                     type="submit"
                     id="btn-search"
+                    onclick="this.classList.add('opacity-80', 'pointer-events-none'); this.querySelector('.search-icon').classList.add('hidden'); this.querySelector('.spinner-icon').classList.remove('hidden');"
                     class="mt-5 w-full py-3.5 bg-gradient-to-r from-sky-500 to-cyan-600 hover:from-sky-600 hover:to-cyan-700
                            text-white text-sm font-semibold rounded-xl shadow-lg shadow-sky-500/25
                            transition-all duration-300 hover:shadow-sky-500/40 hover:-translate-y-0.5
                            flex items-center justify-center gap-2"
                 >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-white animate-spin hidden spinner-icon" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                     Lacak Sekarang
                 </button>

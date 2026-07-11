@@ -42,6 +42,7 @@
         <div class="space-y-4">
             {{-- Login Staff Button --}}
             <a href="{{ route('login') }}" id="btn-login-staff"
+               onclick="showLoadingState(this)"
                class="group relative flex items-center w-full px-6 py-4 bg-white rounded-xl border border-gray-200/80 shadow-sm hover:shadow-md hover:border-sky-300 transition-all duration-300 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-sky-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="relative flex items-center w-full">
@@ -58,14 +59,19 @@
                             Masuk sebagai Admin atau Owner
                         </p>
                     </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                    <svg class="w-5 h-5 text-white animate-spin hidden spinner-icon" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                 </div>
             </a>
 
             {{-- Cek Pesanan Button --}}
             <a href="/track" id="btn-cek-pesanan"
+               onclick="showLoadingState(this, 'emerald')"
                class="group relative flex items-center w-full px-6 py-4 bg-white rounded-xl border border-gray-200/80 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-300 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="relative flex items-center w-full">
@@ -82,8 +88,12 @@
                             Lacak status pesanan Anda
                         </p>
                     </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                    <svg class="w-5 h-5 text-white animate-spin hidden spinner-icon" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                 </div>
             </a>
@@ -95,5 +105,46 @@
         </p>
     </div>
 
+    <script>
+        function showLoadingState(element, color = 'sky') {
+            // Force hover state classes
+            const gradientBg = element.querySelector('.absolute.inset-0');
+            if (gradientBg) gradientBg.classList.replace('opacity-0', 'opacity-100');
+            
+            const title = element.querySelector('p.text-base');
+            if (title) {
+                title.classList.remove('text-gray-900');
+                title.classList.add('text-white');
+            }
+            
+            const subtitle = element.querySelector('p.text-xs');
+            if (subtitle) {
+                subtitle.classList.remove('text-gray-500');
+                subtitle.classList.add(`text-${color}-100`);
+            }
+            
+            const iconBg = element.querySelector('.flex-shrink-0');
+            if (iconBg) {
+                iconBg.classList.remove(`bg-${color}-100`);
+                iconBg.classList.add('bg-white/20');
+            }
+            
+            const icon = element.querySelector('.flex-shrink-0 svg');
+            if (icon) {
+                icon.classList.remove(`text-${color}-600`);
+                icon.classList.add('text-white');
+            }
+
+            // Hide chevron, show spinner
+            const chevron = element.querySelector('.chevron-icon');
+            if (chevron) chevron.classList.add('hidden');
+            
+            const spinner = element.querySelector('.spinner-icon');
+            if (spinner) spinner.classList.remove('hidden');
+
+            // Disable button
+            element.style.pointerEvents = 'none';
+        }
+    </script>
 </body>
 </html>

@@ -209,7 +209,7 @@
                         <p class="text-sm font-medium text-white truncate">{{ Auth::user()->name }}</p>
                         <p class="text-[10px] text-gray-400">{{ ucfirst(Auth::user()->role) }}</p>
                     </div>
-                    <form method="POST" action="{{ route('logout') }}" class="sidebar-label">
+                    <form method="POST" action="{{ route('logout') }}" class="sidebar-label" onsubmit="return confirm('Apakah Anda yakin ingin keluar?');">
                         @csrf
                         <button type="submit" title="Logout" class="p-1.5 text-gray-400 hover:text-red-400 rounded-lg hover:bg-gray-800 transition-colors duration-200">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -246,7 +246,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <span class="text-sm font-medium">{{ session('success') }}</span>
-                        <button onclick="document.getElementById('alert-success').remove()" class="ml-auto text-emerald-400 hover:text-emerald-600">
+                        <button onclick="closeAlert('alert-success')" class="ml-auto text-emerald-400 hover:text-emerald-600 transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
                     </div>
@@ -258,7 +258,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <span class="text-sm font-medium">{{ session('error') }}</span>
-                        <button onclick="document.getElementById('alert-error').remove()" class="ml-auto text-red-400 hover:text-red-600">
+                        <button onclick="closeAlert('alert-error')" class="ml-auto text-red-400 hover:text-red-600 transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
                     </div>
@@ -273,6 +273,14 @@
     </div>
 
     <script>
+        function closeAlert(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.add('transition-all', 'duration-300', 'opacity-0', '-translate-y-2');
+                setTimeout(() => el.remove(), 300);
+            }
+        }
+
         // Restore sidebar state on load
         document.addEventListener('DOMContentLoaded', function() {
             // Remove preload to enable transitions
