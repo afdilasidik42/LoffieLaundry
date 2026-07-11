@@ -28,37 +28,20 @@ services:
     depends_on:
       - app
 
-<<<<<<< HEAD
   db:
-      image: mysql:8.0
-      container_name: loffielaundry-db
-      restart: unless-stopped
-      command: --default-authentication-plugin=mysql_native_password
-      environment:
-        MYSQL_DATABASE: ${DB_DATABASE:-db_loffielaundry}
-        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
-      volumes:
-        - loffie-mysql-data:/var/lib/mysql
-      ports:
-        - "3306:3306"
-      networks:
-        - loffie-network
-=======
-  mysql:
     image: mysql:8.0
-    container_name: db_loffielaundry
+    container_name: loffielaundry-db
     restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-db_loffielaundry}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
-
     volumes:
       - loffie-mysql-data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3306:3306"
     networks:
       - loffie-network
->>>>>>> 2e381da52c37d6d126db84a980c1e2ef1ba4ab4d
 
 networks:
   loffie-network:

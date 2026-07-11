@@ -160,8 +160,8 @@ class GmPredictionService
         // IAGO: recover the original-scale predicted value at index n
         $predicted = $X1_hat_ago[$n] - $X1_hat_ago[$n - 1];
 
-        // Ensure prediction is positive and reasonable
-        if ($predicted <= 0 || !is_finite($predicted)) {
+        // Ensure prediction is positive and reasonable (max 240 hours / 10 days)
+        if ($predicted <= 0 || !is_finite($predicted) || $predicted > 240) {
             return self::fallbackEstimate($complexity);
         }
 
@@ -189,10 +189,15 @@ class GmPredictionService
      */
     private static function fetchHistoricalData(): array
     {
+        $window = (int) env('GM_TRAINING_WINDOW', 30);
+
         $completedOrders = Pesanan::with(['detailTransaksi.layanan'])
             ->whereNotNull('actual_selesai')
-            ->orderBy('created_at', 'asc')
-            ->get();
+            ->orderBy('created_at', 'desc') // Fetch newest first
+            ->limit($window)
+            ->get()
+            ->reverse() // Restore chronological order for AGO
+            ->values(); // Reset array keys
 
         $data = [];
 

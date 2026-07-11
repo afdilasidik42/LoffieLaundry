@@ -63,8 +63,7 @@
 </head>
 <body class="bg-gray-100 preload">
 
-    {{-- Backdrop Overlay for Mobile --}}
-    <div id="sidebarOverlay" class="fixed inset-0 bg-gray-900/50 z-30 hidden lg:hidden backdrop-blur-sm transition-opacity opacity-0" onclick="closeSidebarMobile()"></div>
+    {{-- Backdrop Overlay for Mobile Removed --}}
 
     <div class="flex min-h-screen w-full">
         {{-- Sidebar --}}
@@ -160,17 +159,11 @@
         </aside>
 
         {{-- Main Content --}}
-        <div id="mainWrapper" class="flex-1 flex flex-col min-h-screen w-full transition-all duration-300 main-wrapper">
+        <div id="mainWrapper" class="flex-1 flex flex-col min-h-screen w-full min-w-0 transition-all duration-300 main-wrapper">
             {{-- Top Header --}}
             <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30 print:hidden">
                 <div class="px-8 py-4 flex items-center justify-between">
                     <div class="flex items-center gap-4">
-                        {{-- Mobile toggle --}}
-                        <button onclick="toggleOwnerSidebar()" class="lg:hidden p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                            </svg>
-                        </button>
                         <div>
                             <h2 class="text-lg font-bold text-gray-900">@yield('page-title', 'Dashboard')</h2>
                             <p class="text-xs text-gray-500 mt-0.5">@yield('page-description', '')</p>
@@ -210,37 +203,13 @@
             </div>
 
             {{-- Page Content --}}
-            <main class="flex-1 px-8 pb-8 @if(!session('success') && !session('error')) pt-6 @endif print:p-0 print:overflow-visible">
+            <main class="flex-1 px-8 pb-8 min-w-0 @if(!session('success') && !session('error')) pt-6 @endif print:p-0 print:overflow-visible">
                 @yield('content')
             </main>
         </div>
     </div>
 
     <script>
-        function toggleOwnerSidebar() {
-            const sidebar = document.getElementById('ownerSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            // Toggle for mobile only
-            sidebar.classList.toggle('mobile-open');
-            if (sidebar.classList.contains('mobile-open')) {
-                overlay.classList.remove('hidden');
-                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
-            } else {
-                overlay.classList.add('opacity-0');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            }
-        }
-
-        function closeSidebarMobile() {
-            if (window.innerWidth <= 1024) {
-                document.getElementById('ownerSidebar').classList.remove('mobile-open');
-                const overlay = document.getElementById('sidebarOverlay');
-                overlay.classList.add('opacity-0');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            }
-        }
-
         // Restore sidebar state on load
         document.addEventListener('DOMContentLoaded', function() {
             // Remove preload to enable transitions
