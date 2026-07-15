@@ -65,7 +65,7 @@ class StatusController extends Controller
                 //    GmPredictionService::fetchHistoricalData() which uses tanggal_masuk
                 //    for computing historical X1 (durasi_jam) training data.
                 $tanggalMasuk = Carbon::parse($pesanan->tanggal_masuk);
-                $diffSeconds  = $now->diffInSeconds($tanggalMasuk);
+                $diffSeconds  = $now->diffInSeconds($tanggalMasuk, true);
                 $actualJam    = $diffSeconds / 3600;
 
                 // 3. Retrieve prediksi_log for this pesanan
